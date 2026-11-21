@@ -1,0 +1,118 @@
+/* --- Products Page --- */
+.filter-tabs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+
+.filter-btn {
+  padding: 10px 24px;
+  border-radius: 50px;
+  background: var(--white-05);
+  border: 1px solid var(--border-subtle);
+  color: var(--white-80);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font-body);
+  letter-spacing: 0.3px;
+}
+
+.filter-btn:hover {
+  border-color: var(--border-gold);
+  color: var(--gold-primary);
+  background: rgba(255,215,0,0.06);
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary));
+  color: #000;
+  border-color: transparent;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(255,165,0,0.3);
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.product-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  transition: all var(--transition-med);
+  cursor: pointer;
+}
+
+.product-card:hover {
+  border-color: var(--border-gold);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-gold);
+  background: var(--bg-card-hover);
+}
+
+.product-card.hidden { display: none; }
+
+.product-icon {
+  font-size: 2.8rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 6px rgba(255,165,0,0.3));
+}
+
+.product-name {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--gold-primary);
+  letter-spacing: 0.3px;
+}
+
+.product-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.product-category-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  background: rgba(255,165,0,0.1);
+  border: 1px solid rgba(255,165,0,0.2);
+  border-radius: 20px;
+  font-size: 0.72rem;
+  color: var(--gold-secondary);
+  letter-spacing: 0.5px;
+}
+
+/* --- Bulk Order Banner --- */
+.bulk-banner {
+  background: linear-gradient(135deg, rgba(255,165,0,0.1), rgba(255,215,0,0.05));
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  text-align: center;
+  margin-top: 60px;
+}
+
+.bulk-banner h3 {
+  color: var(--gold-primary);
+  margin-bottom: 12px;
+}
+
+.bulk-banner p {
+  color: var(--text-secondary);
+  margin-bottom: 28px;
+}
+

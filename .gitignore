@@ -1,0 +1,16 @@
+# Original full-size photos (about 1.1 GB). The site only uses the web-sized copies in assets/images/gallery/.
+# Keep the originals somewhere else (or in cloud storage) and do not upload them with the website.
+assets/images/jpg (1)/
+assets/images/jpg 2/
+assets/images/new jpg/
+
+# local test files
+test_img.jpg
+assets/images/duplicates/
+
+# backend test dependencies
+supabase/tests/node_modules/
+
+# Claude session notes (local only, never commit)
+CONTEXT.md
+HANDOFF.md

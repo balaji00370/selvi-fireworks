@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    (function(){
+      var t = localStorage.getItem('selvi-theme') || (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="assets/images/brand-seal-icon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Selvi Fireworks Industries</title>
+  <meta name="description" content="Selvi Fireworks admin." />
+  <link rel="canonical" href="https://www.selvifireworks.com/admin.html" />
+  <meta name="theme-color" content="#f59e0b" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Selvi Fireworks Industries" />
+  <meta property="og:title" content="Bill — Selvi Fireworks Industries" />
+  <meta property="og:description" content="Selvi Fireworks admin." />
+  <meta property="og:url" content="https://www.selvifireworks.com/admin.html" />
+  <meta property="og:image" content="https://www.selvifireworks.com/assets/images/logo.png" />
+  <meta property="og:locale" content="en_IN" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/base.css?v=95" />
+  <link rel="stylesheet" href="assets/css/responsive.css?v=36" />
+  <link rel="stylesheet" href="assets/css/theme.css?v=36" />
+  <link rel="stylesheet" href="assets/css/light.css?v=112" />
+  <link rel="stylesheet" href="assets/css/mobile.css?v=105" />
+  <link rel="stylesheet" href="assets/css/orders.css?v=112" />
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<!-- Page Loader -->
+<div id="page-loader">
+  <div class="loader-logo"><svg class="gold-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;display:inline-block;"><path d="M12 2V6M12 18V22M2 12H6M18 12H22M4.93 4.93L7.76 7.76M16.24 16.24L19.07 19.07M4.93 19.07L7.76 16.24M16.24 7.76L19.07 4.93" stroke="url(#goldGrad)" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="12" r="3" fill="url(#goldGrad)"/><defs><linearGradient id="goldGrad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse"><stop stop-color="#FFD700"/><stop offset="1" stop-color="#FFA500"/></linearGradient></defs></svg> Selvi Fireworks</div>
+  <div class="loader-bar"></div>
+</div>
+
+<header class="adm-bar">
+  <a href="index.html" class="adm-bar-brand"><img src="assets/images/logo.png" alt="Selvi Fireworks"><span>Admin</span></a>
+  <div class="adm-bar-r">
+    <a href="index.html" class="adm-bar-link" target="_blank" rel="noopener">View website &#8599;</a>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark/Light Mode" title="Toggle Theme">
+        <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+  </div>
+</header>
+
+<section class="ord-section" style="padding-top:24px;min-height:80vh;">
+  <div class="container">
+    <div class="adm-setup" id="adm-setup" hidden>
+      <h2>Online ordering is not connected yet</h2>
+      <p>Open <code>assets/js/config.js</code> and add your Supabase URL and anon key. The steps are in <code>supabase/SETUP.md</code>.</p>
+    </div>
+
+    <div class="panel adm-login" id="adm-login">
+      <div class="panel-head"><span>Admin login</span><small>Selvi Fireworks staff only</small></div>
+      <div class="panel-body">
+        <form id="adm-login-form" class="find-form" style="grid-template-columns:1fr;" novalidate>
+          <div><label for="adm-email">Email</label><input id="adm-email" type="email" autocomplete="username" required></div>
+          <div><label for="adm-pass">Password</label><input id="adm-pass" type="password" autocomplete="current-password" required></div>
+          <button type="submit">Log in</button>
+        </form>
+        <p class="adm-msg" id="adm-login-msg" hidden></p>
+        <p class="pay-note" id="adm-testnote" hidden>Test mode (not connected to Supabase yet). Sample login: <b>admin@selvi.test</b> / <b>admin123</b>. Everything you change stays in this browser only.</p>
+      </div>
+    </div>
+
+    <div id="adm-app" hidden>
+      <div class="adm-top">
+        <h1>Admin</h1>
+        <div class="adm-top-r"><span id="adm-user"></span>
+          <button type="button" class="btn btn-outline btn-sm" id="adm-refresh">Refresh</button>
+          <button type="button" class="btn btn-outline btn-sm" id="adm-logout">Log out</button></div>
+      </div>
+      <div class="adm-tabs" id="adm-tabs">
+        <button type="button" data-v="orders" class="on">Orders</button>
+        <button type="button" data-v="products">Products</button>
+        <button type="button" data-v="categories">Categories</button>
+        <button type="button" data-v="brands">Brands</button>
+        <button type="button" data-v="settings">Settings</button>
+        <button type="button" data-v="password">Password</button>
+      </div>
+      <p class="adm-msg" id="mm-msg" hidden></p>
+      <div id="v-products" hidden></div><div id="v-categories" hidden></div><div id="v-brands" hidden></div><div id="v-settings" hidden></div><div id="v-password" hidden></div>
+      <div id="v-orders">
+      <p class="adm-msg" id="adm-msg" hidden></p>
+      <div class="adm-filters" id="adm-filters"></div>
+      <input class="adm-search" id="adm-search" type="search" placeholder="Search bill number, name, mobile or city">
+      <div class="adm-tablewrap">
+        <table class="adm-table stack">
+          <thead><tr><th>Bill</th><th>Date</th><th>Customer</th><th>City</th><th class="r">Total</th><th>Payment</th><th>Status</th></tr></thead>
+          <tbody id="adm-rows"></tbody>
+        </table>
+      </div>
+      <div class="panel adm-detail" id="adm-detail" hidden></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<script src="assets/js/theme.js?v=1"></script>
+<script src="assets/js/config.js?v=1"></script>
+<script src="assets/js/vendor/supabase.js"></script>
+<script src="assets/js/orders.js?v=4"></script>
+<script src="assets/js/vendor/html2canvas.min.js"></script>
+<script src="assets/js/vendor/jspdf.umd.min.js"></script>
+<script src="assets/js/billpdf.js?v=1"></script>
+<script src="assets/js/admin-local.js?v=1"></script>
+<script src="assets/js/admin.js?v=8"></script>
+<script src="assets/js/admin-master.js?v=4"></script>
+<script>if (window.SELVI_LOCAL_ADMIN) document.getElementById("adm-testnote").hidden = false;</script>
+<script src="assets/js/main.js?v=8"></script>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "Selvi Fireworks Industries",
+  "short_name": "Selvi Fireworks",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#f59e0b",
+  "icons": [
+    {
+      "src": "assets/images/brand-seal-icon.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}

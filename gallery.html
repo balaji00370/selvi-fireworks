@@ -1,78 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    (function(){
+      var t = localStorage.getItem('selvi-theme') || (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="assets/images/brand-seal-icon.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gallery — Selvi Fireworks Industries</title>
-  <meta name="description" content="Browse our fireworks gallery — Diwali collections, wedding fireworks, ground items, rockets and more from Selvi Fireworks Industries, Sivakasi." />
+  <meta name="description" content="Real product photos of Selvi Fireworks crackers, sparklers, bombs, flower pots, rockets, aerial shots and gift boxes from Sivakasi. Filter by cracker type." />
+  <link rel="canonical" href="https://www.selvifireworks.com/gallery.html" />
+  <meta name="theme-color" content="#f59e0b" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Selvi Fireworks Industries" />
+  <meta property="og:title" content="Gallery — Selvi Fireworks Industries" />
+  <meta property="og:description" content="Real product photos of Selvi Fireworks crackers, sparklers, bombs, flower pots, rockets, aerial shots and gift boxes from Sivakasi. Filter by cracker type." />
+  <meta property="og:url" content="https://www.selvifireworks.com/gallery.html" />
+  <meta property="og:image" content="https://www.selvifireworks.com/assets/images/logo.png" />
+  <meta property="og:locale" content="en_IN" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="manifest" href="site.webmanifest" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <style>
-    /* Extra gallery spacing tweaks */
-    .gallery-section { padding: 80px 0 100px; }
-    .gallery-intro { text-align:center; margin-bottom: 56px; }
-    .gallery-filter { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:48px; }
-    .gallery-filter-btn {
-      padding:8px 20px; border-radius:50px; border:1px solid var(--border-subtle);
-      background:var(--white-05); color:var(--white-80); font-size:0.85rem; font-weight:500;
-      cursor:pointer; transition:all 0.2s ease; font-family:var(--font-body);
-    }
-    .gallery-filter-btn.active, .gallery-filter-btn:hover {
-      background:rgba(255,215,0,0.12); border-color:var(--border-gold); color:var(--gold-primary);
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/base.css?v=95" />
+  <link rel="stylesheet" href="assets/css/gallery.css?v=38" />
+  <link rel="stylesheet" href="assets/css/responsive.css?v=36" />
+  <link rel="stylesheet" href="assets/css/theme.css?v=36" />
+  <link rel="stylesheet" href="assets/css/light.css?v=112" />
+  <link rel="stylesheet" href="assets/css/mobile.css?v=105" />
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to content</a>
 
 <!-- Page Loader -->
 <div id="page-loader">
-  <div class="loader-logo">🎆 Selvi Fireworks</div>
+  <div class="loader-logo"><svg class="gold-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;display:inline-block;"><path d="M12 2V6M12 18V22M2 12H6M18 12H22M4.93 4.93L7.76 7.76M16.24 16.24L19.07 19.07M4.93 19.07L7.76 16.24M16.24 7.76L19.07 4.93" stroke="url(#goldGrad)" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="12" r="3" fill="url(#goldGrad)"/><defs><linearGradient id="goldGrad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse"><stop stop-color="#FFD700"/><stop offset="1" stop-color="#FFA500"/></linearGradient></defs></svg> Selvi Fireworks</div>
   <div class="loader-bar"></div>
 </div>
 
 <!-- Navigation -->
 <nav id="navbar">
   <div class="container nav-inner">
-    <a href="index.html" class="nav-logo">
-      <span class="nav-logo-icon">🎆</span>
-      Selvi Fireworks
+    <a href="index.html" class="nav-brand-wrap">
+      <img src="assets/images/logo.png" alt="Selvi Fireworks Industries" class="nav-logo-img">
     </a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="products.html">Products</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="gallery.html" class="active">Gallery</a></li>
-      <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
+      <li><a href="index.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:8px;"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>Home</a></li>
+      <li><a href="products.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:8px;"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>Products</a></li>
+      <li><a href="about.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>About Us</a></li>
+      <li><a href="gallery.html" class="active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:8px;"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>Gallery</a></li>
+      <li><a href="contact.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:8px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>Contact Us</a></li>
+      <li><a href="vieworders.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" y1="13" x2="16" y2="13"></line><line x1="8" y1="17" x2="14" y2="17"></line></svg>View Orders</a></li>
+      <li><a href="booknow.html" class="nav-cta"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:8px;"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>Book Now</a></li>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav-actions">
+      <a href="login.html" class="nav-user" id="nav-user" aria-label="Login or sign up" title="Login / Sign up"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+      <a href="booknow.html" class="nav-book-mobile" aria-label="Book Now">Book Now</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark/Light Mode" title="Toggle Theme">
+        <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </nav>
 
 <!-- Mobile Nav -->
 <nav class="mobile-nav" id="mobile-nav">
-  <a href="index.html">🏠 Home</a>
-  <a href="products.html">🎇 Products</a>
-  <a href="about.html">👥 About Us</a>
-  <a href="gallery.html" class="active">🖼️ Gallery</a>
-  <a href="contact.html">📞 Contact Us</a>
+  <a href="index.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:8px;"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>Home</a>
+  <a href="products.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:8px;"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>Products</a>
+  <a href="about.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:8px;"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>About Us</a>
+  <a href="gallery.html" class="active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:8px;"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>Gallery</a>
+  <a href="contact.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:8px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>Contact Us</a>
+  <a href="vieworders.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" y1="13" x2="16" y2="13"></line><line x1="8" y1="17" x2="14" y2="17"></line></svg>View Orders</a>
+  <a href="booknow.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:8px;"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>Book Now</a>
+  <a href="login.html" class="mobile-login">Login / Sign up</a>
 </nav>
 
 <!-- Page Hero -->
-<section class="page-hero">
+<section id="main-content" class="page-hero">
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="index.html">Home</a>
+      <a href="index.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:8px;"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>Home</a>
       <span class="breadcrumb-sep">›</span>
       <span class="breadcrumb-current">Gallery</span>
     </nav>
     <span class="section-label">Our Showcase</span>
     <h1>Fireworks <span class="text-gold">Gallery</span></h1>
-    <p style="color:var(--text-secondary);max-width:560px;margin:16px auto 0;font-size:1rem;">
-      A visual celebration of our finest fireworks — from dazzling aerial displays to intricate ground effects, each one crafted with passion in Sivakasi
+    <p style="color:var(--text-secondary);max-width:600px;margin:16px auto 0;font-size:1rem;">
+      Real photos of our crackers, sparklers, bombs, fountains and gift boxes &mdash; pick a cracker type to filter, and tap any product to see every photo.
     </p>
   </div>
 </section>
@@ -80,185 +103,559 @@
 <!-- Gallery Section -->
 <section class="gallery-section">
   <div class="container">
-    <div class="gallery-grid" id="gallery-grid">
-
-      <!-- Item 1 -->
-      <div class="gallery-item anim-fade-up" tabindex="0" role="button"
-           data-emoji="🎆" data-title="Diwali Grand Collection"
-           data-desc="Our signature Diwali collection features a spectacular blend of aerial rockets, ground chakkars, and flower pots — a complete festival package for the grandest night of the year.">
-        <div class="gallery-box gallery-g1">
-          <span class="gallery-box-emoji">🎆</span>
-          <span class="gallery-box-label">Diwali Collection</span>
-        </div>
-        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-      </div>
-
-      <!-- Item 2 -->
-      <div class="gallery-item anim-fade-up delay-1" tabindex="0" role="button"
-           data-emoji="💍" data-title="Wedding Fireworks Display"
-           data-desc="Make your wedding night unforgettable with our curated wedding fireworks package — aerial shots, sparklers, and grand finales that create memories lasting a lifetime.">
-        <div class="gallery-box gallery-g4">
-          <span class="gallery-box-emoji">💍</span>
-          <span class="gallery-box-label">Wedding Fireworks</span>
-        </div>
-        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-      </div>
-
-      <!-- Item 3 -->
-      <div class="gallery-item anim-fade-up delay-2" tabindex="0" role="button"
-           data-emoji="🌀" data-title="Ground Items Showcase"
-           data-desc="Our ground items — spinning chakkars, giant wheels, and flower pots — create mesmerising patterns of sparks right at ground level, perfect for all-age celebrations.">
-        <div class="gallery-box gallery-g2">
-          <span class="gallery-box-emoji">🌀</span>
-          <span class="gallery-box-label">Ground Items</span>
-        </div>
-        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-      </div>
-
-      <!-- Item 4 -->
-      <div class="gallery-item anim-fade-up delay-3" tabindex="0" role="button"
-           data-emoji="✨" data-title="Sparkler Collection"
-           data-desc="Our sparklers — from Twinkling Stars to multi-colour varieties — cast a magical glow that is beloved by children and adults alike. Perfect for photos and intimate celebrations.">
-        <div class="gallery-box gallery-g5">
-          <span class="gallery-box-emoji">✨</span>
-          <span class="gallery-box-label">Sparkler Collection</span>
-        </div>
-        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-      </div>
-
-      <!-- Item 5 -->
-      <div class="gallery-item anim-fade-up" tabindex="0" role="button"
-           data-emoji="🚀" data-title="Aerial Rocket Display"
-           data-desc="Our rocket range — Rocket Bombs and Lunik Express — soar skyward at breathtaking speed before erupting in a magnificent burst of colour and sound high above the crowd.">
-        <div class="gallery-box gallery-g3">
-          <span class="gallery-box-emoji">🚀</span>
-          <span class="gallery-box-label">Aerial Rockets</span>
-        </div>
-        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-      </div>
-
-      <!-- Item 6 -->
-      <div class="gallery-item anim-fade-up delay-1" tabindex="0" role="button"
-           data-emoji="🌸" data-title="Flower Pot Fountains"
-           data-desc="Our Flower Pot range — from Small to Giant and Asoka — create beautiful cascading fountains of sparks that bloom upward like flowers of fire and light.">
-        <div class="gallery-box gallery-g7">
-          <span class="gallery-box-emoji">🌸</span>
-          <span class="gallery-box-label">Flower Pot Fountains</span>
-        </div>
-        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-      </div>
-
-      <!-- Item 7 -->
-      <div class="gallery-item anim-fade-up delay-2" tabindex="0" role="button"
-           data-emoji="🎁" data-title="Festival Gift Boxes"
-           data-desc="Our beautifully curated festival gift boxes in Small, Medium, Large, and Corporate sizes — a complete fireworks experience wrapped in an elegant, premium package.">
-        <div class="gallery-box gallery-g8">
-          <span class="gallery-box-emoji">🎁</span>
-          <span class="gallery-box-label">Festival Gift Boxes</span>
-        </div>
-        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-      </div>
-
-      <!-- Item 8 -->
-      <div class="gallery-item anim-fade-up delay-3" tabindex="0" role="button"
-           data-emoji="🎨" data-title="Multi-Colour Aerial Shots"
-           data-desc="Our multi-colour aerial shots fire rapid bursts of brilliantly coloured stars — red, gold, green, blue, and silver — creating a mesmerising rainbow in the night sky.">
-        <div class="gallery-box gallery-g6">
-          <span class="gallery-box-emoji">🎨</span>
-          <span class="gallery-box-label">Multi-Colour Aerials</span>
-        </div>
-        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-      </div>
-
-      <!-- Item 9 -->
-      <div class="gallery-item anim-fade-up" tabindex="0" role="button"
-           data-emoji="💥" data-title="Atom Bomb Series"
-           data-desc="The legendary Atom Bomb series — Atom Bomb, Hydro Bomb, and Sumo Bomb — delivers earth-shaking detonations that fill the air with thunderous celebration.">
-        <div class="gallery-box gallery-g1">
-          <span class="gallery-box-emoji">💥</span>
-          <span class="gallery-box-label">Bomb Series</span>
-        </div>
-        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-      </div>
-
-      <!-- Item 10 -->
-      <div class="gallery-item anim-fade-up delay-1" tabindex="0" role="button"
-           data-emoji="🧨" data-title="Cracker Strand Display"
-           data-desc="Our cracker strands — from 28 to 10,000 crackers — deliver rapid-fire pops of sound and light that fill the air with the unmistakable sound of celebration.">
-        <div class="gallery-box gallery-g4">
-          <span class="gallery-box-emoji">🧨</span>
-          <span class="gallery-box-label">Cracker Strands</span>
-        </div>
-        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-      </div>
-
-      <!-- Item 11 -->
-      <div class="gallery-item anim-fade-up delay-2" tabindex="0" role="button"
-           data-emoji="🌃" data-title="Night Sky Display"
-           data-desc="A full professional night sky display using our complete aerial range — rockets, aerial shots, and grand finale items combining to paint the sky in breathtaking colour.">
-        <div class="gallery-box gallery-g3">
-          <span class="gallery-box-emoji">🌃</span>
-          <span class="gallery-box-label">Night Sky Display</span>
-        </div>
-        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-      </div>
-
-      <!-- Item 12 -->
-      <div class="gallery-item anim-fade-up delay-3" tabindex="0" role="button"
-           data-emoji="🎊" data-title="New Year Celebrations"
-           data-desc="Ring in the New Year with a bang! Our New Year packages combine aerial rockets, ground items, and sparklers for a countdown celebration nobody will forget.">
-        <div class="gallery-box gallery-g2">
-          <span class="gallery-box-emoji">🎊</span>
-          <span class="gallery-box-label">New Year Special</span>
-        </div>
-        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-      </div>
-
-      <!-- Item 13 -->
-      <div class="gallery-item anim-fade-up" tabindex="0" role="button"
-           data-emoji="🎡" data-title="Giant Wheel Show"
-           data-desc="The Giant Wheel — our most dramatic ground effect — spins in a hypnotic blaze of multi-coloured fire, drawing gasps and applause from the entire crowd.">
-        <div class="gallery-box gallery-g5">
-          <span class="gallery-box-emoji">🎡</span>
-          <span class="gallery-box-label">Giant Wheel</span>
-        </div>
-        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-      </div>
-
-      <!-- Item 14 -->
-      <div class="gallery-item anim-fade-up delay-1" tabindex="0" role="button"
-           data-emoji="🏮" data-title="Temple Festival Display"
-           data-desc="Traditional temple and festival displays with our special pooja-safe sparklers, chakkars, and flower pots — celebrating India's rich cultural and spiritual heritage.">
-        <div class="gallery-box gallery-g7">
-          <span class="gallery-box-emoji">🏮</span>
-          <span class="gallery-box-label">Temple Festival</span>
-        </div>
-        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-      </div>
-
-      <!-- Item 15 -->
-      <div class="gallery-item anim-fade-up delay-2" tabindex="0" role="button"
-           data-emoji="🎇" data-title="Corporate Event Display"
-           data-desc="Impress your stakeholders and employees with a bespoke corporate fireworks display — professionally planned using our premium aerial shots, rockets, and grand finales.">
-        <div class="gallery-box gallery-g6">
-          <span class="gallery-box-emoji">🎇</span>
-          <span class="gallery-box-label">Corporate Events</span>
-        </div>
-        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-      </div>
-
-      <!-- Item 16 -->
-      <div class="gallery-item anim-fade-up delay-3" tabindex="0" role="button"
-           data-emoji="🌟" data-title="Children's Special Collection"
-           data-desc="Our children's safety sparklers, novelty items, and colour matches are designed for maximum fun with the highest safety standards — magical moments for little ones.">
-        <div class="gallery-box gallery-g8">
-          <span class="gallery-box-emoji">🌟</span>
-          <span class="gallery-box-label">Kids' Special</span>
-        </div>
-        <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-      </div>
-
+    <div class="gallery-filter" role="group" aria-label="Filter by cracker type">
+      <button type="button" class="gallery-filter-btn active" data-filter="all" aria-pressed="true">All <span class="n">107</span></button>
+      <button type="button" class="gallery-filter-btn" data-filter="sound" aria-pressed="false">Sound Crackers <span class="n">5</span></button>
+      <button type="button" class="gallery-filter-btn" data-filter="bijili" aria-pressed="false">Bijili <span class="n">2</span></button>
+      <button type="button" class="gallery-filter-btn" data-filter="bombs" aria-pressed="false">Bombs <span class="n">6</span></button>
+      <button type="button" class="gallery-filter-btn" data-filter="chakkars" aria-pressed="false">Ground Chakkars <span class="n">6</span></button>
+      <button type="button" class="gallery-filter-btn" data-filter="flowerpots" aria-pressed="false">Flower Pots <span class="n">6</span></button>
+      <button type="button" class="gallery-filter-btn" data-filter="rockets" aria-pressed="false">Rockets <span class="n">6</span></button>
+      <button type="button" class="gallery-filter-btn" data-filter="sparklers" aria-pressed="false">Sparklers <span class="n">12</span></button>
+      <button type="button" class="gallery-filter-btn" data-filter="aerial" aria-pressed="false">Aerial Shots <span class="n">35</span></button>
+      <button type="button" class="gallery-filter-btn" data-filter="fancy" aria-pressed="false">Fancy &amp; Novelties <span class="n">23</span></button>
+      <button type="button" class="gallery-filter-btn" data-filter="giftboxes" aria-pressed="false">Gift Boxes <span class="n">6</span></button>
     </div>
+    <p class="gallery-count" id="gallery-count" aria-live="polite">Showing 107 products &middot; 351 photos</p>
+
+    <div class="photo-grid" id="gallery-grid">
+      <button type="button" class="photo-tile" data-cat="sound" data-catname="Sound Crackers" data-name="2 Sound Crackers" data-photo-count="7" data-photos="2-sound-crackers-1,2-sound-crackers-2,2-sound-crackers-3,2-sound-crackers-4,2-sound-crackers-5,2-sound-crackers-6,2-sound-crackers-7">
+        <span class="photo-frame"><img src="assets/images/gallery/t/2-sound-crackers-1.webp" width="468" height="560" alt="2 Sound Crackers – Selvi Fireworks, Sivakasi" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">2 Sound Crackers</span><span class="photo-cat">Sound Crackers</span></span>
+        <span class="photo-badge">7 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="sound" data-catname="Sound Crackers" data-name="Chotta Bheem Crackers" data-photo-count="5" data-photos="chotta-bheem-crackers-1,chotta-bheem-crackers-2,chotta-bheem-crackers-3,chotta-bheem-crackers-4,chotta-bheem-crackers-5">
+        <span class="photo-frame"><img src="assets/images/gallery/t/chotta-bheem-crackers-1.webp" width="560" height="316" alt="Chotta Bheem Crackers – Selvi Fireworks, Sivakasi" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Chotta Bheem Crackers</span><span class="photo-cat">Sound Crackers</span></span>
+        <span class="photo-badge">5 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="sound" data-catname="Sound Crackers" data-name="Hulk Crackers" data-photo-count="3" data-photos="hulk-crackers-1,hulk-crackers-2,hulk-crackers-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/hulk-crackers-1.webp" width="560" height="289" alt="Hulk Crackers – Selvi Fireworks, Sivakasi" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Hulk Crackers</span><span class="photo-cat">Sound Crackers</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="sound" data-catname="Sound Crackers" data-name="Kuruvi Crackers" data-photo-count="9" data-photos="kuruvi-crackers-1,kuruvi-crackers-2,kuruvi-crackers-3,kuruvi-crackers-4,kuruvi-crackers-5,kuruvi-crackers-6,kuruvi-crackers-7,kuruvi-crackers-8,kuruvi-crackers-9">
+        <span class="photo-frame"><img src="assets/images/gallery/t/kuruvi-crackers-1.webp" width="560" height="400" alt="Kuruvi Crackers – Selvi Fireworks, Sivakasi" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Kuruvi Crackers</span><span class="photo-cat">Sound Crackers</span></span>
+        <span class="photo-badge">9 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="sound" data-catname="Sound Crackers" data-name="Lakshmi Crackers" data-photo-count="6" data-photos="lakshmi-crackers-1,lakshmi-crackers-2,lakshmi-crackers-3,lakshmi-crackers-4,lakshmi-crackers-5,lakshmi-crackers-6">
+        <span class="photo-frame"><img src="assets/images/gallery/t/lakshmi-crackers-1.webp" width="560" height="289" alt="Lakshmi Crackers – Selvi Fireworks, Sivakasi" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Lakshmi Crackers</span><span class="photo-cat">Sound Crackers</span></span>
+        <span class="photo-badge">6 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="bijili" data-catname="Bijili" data-name="Bijili Crackers (Blue)" data-photo-count="7" data-photos="bijili-crackers-blue-1,bijili-crackers-blue-2,bijili-crackers-blue-3,bijili-crackers-blue-4,bijili-crackers-blue-5,bijili-crackers-blue-6,bijili-crackers-blue-7">
+        <span class="photo-frame"><img src="assets/images/gallery/t/bijili-crackers-blue-1.webp" width="560" height="436" alt="Bijili Crackers (Blue) – Selvi Fireworks, Sivakasi" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Bijili Crackers (Blue)</span><span class="photo-cat">Bijili</span></span>
+        <span class="photo-badge">7 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="bijili" data-catname="Bijili" data-name="Bijili Crackers (Green)" data-photo-count="4" data-photos="bijili-crackers-green-1,bijili-crackers-green-2,bijili-crackers-green-3,bijili-crackers-green-4">
+        <span class="photo-frame"><img src="assets/images/gallery/t/bijili-crackers-green-1.webp" width="560" height="453" alt="Bijili Crackers (Green) – Selvi Fireworks, Sivakasi" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Bijili Crackers (Green)</span><span class="photo-cat">Bijili</span></span>
+        <span class="photo-badge">4 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="bombs" data-catname="Bombs" data-name="Atom Bomb" data-photo-count="4" data-photos="atom-bomb-1,atom-bomb-2,atom-bomb-3,atom-bomb-4">
+        <span class="photo-frame"><img src="assets/images/gallery/t/atom-bomb-1.webp" width="560" height="224" alt="Atom Bomb – Selvi Fireworks, Sivakasi" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Atom Bomb</span><span class="photo-cat">Bombs</span></span>
+        <span class="photo-badge">4 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="bombs" data-catname="Bombs" data-name="Cylinder Smoke Bomb" data-photo-count="1" data-photos="cylinder-smoke-bomb-1">
+        <span class="photo-frame"><img src="assets/images/gallery/t/cylinder-smoke-bomb-1.webp" width="560" height="557" alt="Cylinder Smoke Bomb – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Cylinder Smoke Bomb</span><span class="photo-cat">Bombs</span></span>
+        
+      </button>
+      <button type="button" class="photo-tile" data-cat="bombs" data-catname="Bombs" data-name="Grenade Bomb" data-photo-count="3" data-photos="grenade-bomb-1,grenade-bomb-2,grenade-bomb-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/grenade-bomb-1.webp" width="560" height="440" alt="Grenade Bomb – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Grenade Bomb</span><span class="photo-cat">Bombs</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="bombs" data-catname="Bombs" data-name="Hydro Bomb" data-photo-count="4" data-photos="hydro-bomb-1,hydro-bomb-2,hydro-bomb-3,hydro-bomb-4">
+        <span class="photo-frame"><img src="assets/images/gallery/t/hydro-bomb-1.webp" width="505" height="560" alt="Hydro Bomb – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Hydro Bomb</span><span class="photo-cat">Bombs</span></span>
+        <span class="photo-badge">4 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="bombs" data-catname="Bombs" data-name="Nuclear Bomb" data-photo-count="3" data-photos="nuclear-bomb-1,nuclear-bomb-2,nuclear-bomb-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/nuclear-bomb-1.webp" width="497" height="560" alt="Nuclear Bomb – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Nuclear Bomb</span><span class="photo-cat">Bombs</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="bombs" data-catname="Bombs" data-name="Sumo Bomb" data-photo-count="3" data-photos="sumo-bomb-1,sumo-bomb-2,sumo-bomb-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/sumo-bomb-1.webp" width="560" height="369" alt="Sumo Bomb – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Sumo Bomb</span><span class="photo-cat">Bombs</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="chakkars" data-catname="Ground Chakkars" data-name="5G Giant Wheel" data-photo-count="3" data-photos="5g-giant-wheel-1,5g-giant-wheel-2,5g-giant-wheel-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/5g-giant-wheel-1.webp" width="560" height="204" alt="5G Giant Wheel – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">5G Giant Wheel</span><span class="photo-cat">Ground Chakkars</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="chakkars" data-catname="Ground Chakkars" data-name="Ground Chakkar Big" data-photo-count="4" data-photos="ground-chakkar-big-1,ground-chakkar-big-2,ground-chakkar-big-3,ground-chakkar-big-4">
+        <span class="photo-frame"><img src="assets/images/gallery/t/ground-chakkar-big-1.webp" width="560" height="412" alt="Ground Chakkar Big – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Ground Chakkar Big</span><span class="photo-cat">Ground Chakkars</span></span>
+        <span class="photo-badge">4 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="chakkars" data-catname="Ground Chakkars" data-name="Spinner Deluxe" data-photo-count="4" data-photos="spinner-deluxe-1,spinner-deluxe-2,spinner-deluxe-3,spinner-deluxe-4">
+        <span class="photo-frame"><img src="assets/images/gallery/t/spinner-deluxe-1.webp" width="560" height="340" alt="Spinner Deluxe – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Spinner Deluxe</span><span class="photo-cat">Ground Chakkars</span></span>
+        <span class="photo-badge">4 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="chakkars" data-catname="Ground Chakkars" data-name="Whistling Wheel" data-photo-count="4" data-photos="whistling-wheel-1,whistling-wheel-2,whistling-wheel-3,whistling-wheel-4">
+        <span class="photo-frame"><img src="assets/images/gallery/t/whistling-wheel-1.webp" width="560" height="213" alt="Whistling Wheel – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Whistling Wheel</span><span class="photo-cat">Ground Chakkars</span></span>
+        <span class="photo-badge">4 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="chakkars" data-catname="Ground Chakkars" data-name="Zamin Chakkar Deluxe" data-photo-count="3" data-photos="zamin-chakkar-deluxe-1,zamin-chakkar-deluxe-2,zamin-chakkar-deluxe-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/zamin-chakkar-deluxe-1.webp" width="560" height="303" alt="Zamin Chakkar Deluxe – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Zamin Chakkar Deluxe</span><span class="photo-cat">Ground Chakkars</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="chakkars" data-catname="Ground Chakkars" data-name="Zamin Chakkar Special" data-photo-count="5" data-photos="zamin-chakkar-special-1,zamin-chakkar-special-2,zamin-chakkar-special-3,zamin-chakkar-special-4,zamin-chakkar-special-5">
+        <span class="photo-frame"><img src="assets/images/gallery/t/zamin-chakkar-special-1.webp" width="560" height="297" alt="Zamin Chakkar Special – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Zamin Chakkar Special</span><span class="photo-cat">Ground Chakkars</span></span>
+        <span class="photo-badge">5 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="flowerpots" data-catname="Flower Pots" data-name="Flower Pots Asoka" data-photo-count="4" data-photos="flower-pots-asoka-1,flower-pots-asoka-2,flower-pots-asoka-3,flower-pots-asoka-4">
+        <span class="photo-frame"><img src="assets/images/gallery/t/flower-pots-asoka-1.webp" width="208" height="560" alt="Flower Pots Asoka – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Flower Pots Asoka</span><span class="photo-cat">Flower Pots</span></span>
+        <span class="photo-badge">4 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="flowerpots" data-catname="Flower Pots" data-name="Flower Pots Big" data-photo-count="4" data-photos="flower-pots-big-1,flower-pots-big-2,flower-pots-big-3,flower-pots-big-4">
+        <span class="photo-frame"><img src="assets/images/gallery/t/flower-pots-big-1.webp" width="308" height="560" alt="Flower Pots Big – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Flower Pots Big</span><span class="photo-cat">Flower Pots</span></span>
+        <span class="photo-badge">4 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="flowerpots" data-catname="Flower Pots" data-name="Flower Pots Deluxe" data-photo-count="4" data-photos="flower-pots-deluxe-1,flower-pots-deluxe-2,flower-pots-deluxe-3,flower-pots-deluxe-4">
+        <span class="photo-frame"><img src="assets/images/gallery/t/flower-pots-deluxe-1.webp" width="401" height="560" alt="Flower Pots Deluxe – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Flower Pots Deluxe</span><span class="photo-cat">Flower Pots</span></span>
+        <span class="photo-badge">4 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="flowerpots" data-catname="Flower Pots" data-name="Flower Pots Giant" data-photo-count="3" data-photos="flower-pots-giant-1,flower-pots-giant-2,flower-pots-giant-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/flower-pots-giant-1.webp" width="560" height="463" alt="Flower Pots Giant – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Flower Pots Giant</span><span class="photo-cat">Flower Pots</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="flowerpots" data-catname="Flower Pots" data-name="Flower Pots Small" data-photo-count="7" data-photos="flower-pots-small-1,flower-pots-small-2,flower-pots-small-3,flower-pots-small-4,flower-pots-small-5,flower-pots-small-6,flower-pots-small-7">
+        <span class="photo-frame"><img src="assets/images/gallery/t/flower-pots-small-1.webp" width="419" height="560" alt="Flower Pots Small – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Flower Pots Small</span><span class="photo-cat">Flower Pots</span></span>
+        <span class="photo-badge">7 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="flowerpots" data-catname="Flower Pots" data-name="Flower Pots Special" data-photo-count="4" data-photos="flower-pots-special-1,flower-pots-special-2,flower-pots-special-3,flower-pots-special-4">
+        <span class="photo-frame"><img src="assets/images/gallery/t/flower-pots-special-1.webp" width="560" height="536" alt="Flower Pots Special – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Flower Pots Special</span><span class="photo-cat">Flower Pots</span></span>
+        <span class="photo-badge">4 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="rockets" data-catname="Rockets" data-name="2 Sound Rocket" data-photo-count="2" data-photos="2-sound-rocket-1,2-sound-rocket-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/2-sound-rocket-1.webp" width="168" height="560" alt="2 Sound Rocket – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">2 Sound Rocket</span><span class="photo-cat">Rockets</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="rockets" data-catname="Rockets" data-name="3 Sound Rocket" data-photo-count="3" data-photos="3-sound-rocket-1,3-sound-rocket-2,3-sound-rocket-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/3-sound-rocket-1.webp" width="165" height="560" alt="3 Sound Rocket – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">3 Sound Rocket</span><span class="photo-cat">Rockets</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="rockets" data-catname="Rockets" data-name="Musical Siren" data-photo-count="3" data-photos="musical-siren-1,musical-siren-2,musical-siren-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/musical-siren-1.webp" width="381" height="560" alt="Musical Siren – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Musical Siren</span><span class="photo-cat">Rockets</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="rockets" data-catname="Rockets" data-name="Navarang Rocket" data-photo-count="2" data-photos="navarang-rocket-1,navarang-rocket-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/navarang-rocket-1.webp" width="165" height="560" alt="Navarang Rocket – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Navarang Rocket</span><span class="photo-cat">Rockets</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="rockets" data-catname="Rockets" data-name="Rocket Bomb" data-photo-count="5" data-photos="rocket-bomb-1,rocket-bomb-2,rocket-bomb-3,rocket-bomb-4,rocket-bomb-5">
+        <span class="photo-frame"><img src="assets/images/gallery/t/rocket-bomb-1.webp" width="364" height="560" alt="Rocket Bomb – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Rocket Bomb</span><span class="photo-cat">Rockets</span></span>
+        <span class="photo-badge">5 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="rockets" data-catname="Rockets" data-name="Vibes Whistling Rocket" data-photo-count="2" data-photos="vibes-whistling-rocket-1,vibes-whistling-rocket-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/vibes-whistling-rocket-1.webp" width="163" height="560" alt="Vibes Whistling Rocket – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Vibes Whistling Rocket</span><span class="photo-cat">Rockets</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="sparklers" data-catname="Sparklers" data-name="Colour Sparklers" data-photo-count="2" data-photos="colour-sparklers-1,colour-sparklers-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/colour-sparklers-1.webp" width="335" height="560" alt="Colour Sparklers – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Colour Sparklers</span><span class="photo-cat">Sparklers</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="sparklers" data-catname="Sparklers" data-name="Crackling Sparklers" data-photo-count="6" data-photos="crackling-sparklers-1,crackling-sparklers-2,crackling-sparklers-3,crackling-sparklers-4,crackling-sparklers-5,crackling-sparklers-6">
+        <span class="photo-frame"><img src="assets/images/gallery/t/crackling-sparklers-1.webp" width="104" height="560" alt="Crackling Sparklers – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Crackling Sparklers</span><span class="photo-cat">Sparklers</span></span>
+        <span class="photo-badge">6 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="sparklers" data-catname="Sparklers" data-name="Electric Sparklers" data-photo-count="7" data-photos="electric-sparklers-1,electric-sparklers-2,electric-sparklers-3,electric-sparklers-4,electric-sparklers-5,electric-sparklers-6,electric-sparklers-7">
+        <span class="photo-frame"><img src="assets/images/gallery/t/electric-sparklers-1.webp" width="220" height="560" alt="Electric Sparklers – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Electric Sparklers</span><span class="photo-cat">Sparklers</span></span>
+        <span class="photo-badge">7 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="sparklers" data-catname="Sparklers" data-name="Electric Sparklers 15 cm" data-photo-count="3" data-photos="electric-sparklers-15-cm-1,electric-sparklers-15-cm-2,electric-sparklers-15-cm-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/electric-sparklers-15-cm-1.webp" width="207" height="560" alt="Electric Sparklers 15 cm – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Electric Sparklers 15 cm</span><span class="photo-cat">Sparklers</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="sparklers" data-catname="Sparklers" data-name="Electric Sparklers 30 cm" data-photo-count="2" data-photos="electric-sparklers-30-cm-1,electric-sparklers-30-cm-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/electric-sparklers-30-cm-1.webp" width="120" height="560" alt="Electric Sparklers 30 cm – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Electric Sparklers 30 cm</span><span class="photo-cat">Sparklers</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="sparklers" data-catname="Sparklers" data-name="Green Sparklers" data-photo-count="6" data-photos="green-sparklers-1,green-sparklers-2,green-sparklers-3,green-sparklers-4,green-sparklers-5,green-sparklers-6">
+        <span class="photo-frame"><img src="assets/images/gallery/t/green-sparklers-1.webp" width="198" height="560" alt="Green Sparklers – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Green Sparklers</span><span class="photo-cat">Sparklers</span></span>
+        <span class="photo-badge">6 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="sparklers" data-catname="Sparklers" data-name="Green Sparklers 30 cm" data-photo-count="3" data-photos="green-sparklers-30-cm-1,green-sparklers-30-cm-2,green-sparklers-30-cm-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/green-sparklers-30-cm-1.webp" width="120" height="560" alt="Green Sparklers 30 cm – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Green Sparklers 30 cm</span><span class="photo-cat">Sparklers</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="sparklers" data-catname="Sparklers" data-name="Red Sparklers" data-photo-count="9" data-photos="red-sparklers-1,red-sparklers-2,red-sparklers-3,red-sparklers-4,red-sparklers-5,red-sparklers-6,red-sparklers-7,red-sparklers-8,red-sparklers-9">
+        <span class="photo-frame"><img src="assets/images/gallery/t/red-sparklers-1.webp" width="299" height="560" alt="Red Sparklers – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Red Sparklers</span><span class="photo-cat">Sparklers</span></span>
+        <span class="photo-badge">9 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="sparklers" data-catname="Sparklers" data-name="Red Sparklers 15 cm" data-photo-count="2" data-photos="red-sparklers-15-cm-1,red-sparklers-15-cm-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/red-sparklers-15-cm-1.webp" width="168" height="560" alt="Red Sparklers 15 cm – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Red Sparklers 15 cm</span><span class="photo-cat">Sparklers</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="sparklers" data-catname="Sparklers" data-name="Red Sparklers 30 cm" data-photo-count="2" data-photos="red-sparklers-30-cm-1,red-sparklers-30-cm-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/red-sparklers-30-cm-1.webp" width="123" height="560" alt="Red Sparklers 30 cm – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Red Sparklers 30 cm</span><span class="photo-cat">Sparklers</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="sparklers" data-catname="Sparklers" data-name="Silver Olympic Torches" data-photo-count="2" data-photos="silver-olympic-torches-1,silver-olympic-torches-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/silver-olympic-torches-1.webp" width="237" height="560" alt="Silver Olympic Torches – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Silver Olympic Torches</span><span class="photo-cat">Sparklers</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="sparklers" data-catname="Sparklers" data-name="Sparklers Combo Set" data-photo-count="3" data-photos="sparklers-combo-set-1,sparklers-combo-set-2,sparklers-combo-set-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/sparklers-combo-set-1.webp" width="200" height="560" alt="Sparklers Combo Set – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Sparklers Combo Set</span><span class="photo-cat">Sparklers</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="7 Shot Colour" data-photo-count="5" data-photos="7-shot-colour-1,7-shot-colour-2,7-shot-colour-3,7-shot-colour-4,7-shot-colour-5">
+        <span class="photo-frame"><img src="assets/images/gallery/t/7-shot-colour-1.webp" width="468" height="560" alt="7 Shot Colour – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">7 Shot Colour</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">5 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="916 Gold" data-photo-count="2" data-photos="916-gold-1,916-gold-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/916-gold-1.webp" width="200" height="560" alt="916 Gold – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">916 Gold</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Aerial Shots Collection" data-photo-count="2" data-photos="aerial-shots-collection-1,aerial-shots-collection-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/aerial-shots-collection-1.webp" width="560" height="407" alt="Aerial Shots Collection – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Aerial Shots Collection</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Aerial Shots Combo Set" data-photo-count="9" data-photos="aerial-shots-combo-set-1,aerial-shots-combo-set-2,aerial-shots-combo-set-3,aerial-shots-combo-set-4,aerial-shots-combo-set-5,aerial-shots-combo-set-6,aerial-shots-combo-set-7,aerial-shots-combo-set-8,aerial-shots-combo-set-9">
+        <span class="photo-frame"><img src="assets/images/gallery/t/aerial-shots-combo-set-1.webp" width="560" height="490" alt="Aerial Shots Combo Set – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Aerial Shots Combo Set</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">9 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Asphalt" data-photo-count="2" data-photos="asphalt-1,asphalt-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/asphalt-1.webp" width="314" height="560" alt="Asphalt – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Asphalt</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Assassin&#x27;s Creed" data-photo-count="3" data-photos="assassin-s-creed-1,assassin-s-creed-2,assassin-s-creed-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/assassin-s-creed-1.webp" width="560" height="416" alt="Assassin&#x27;s Creed – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Assassin&#x27;s Creed</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Big Toys" data-photo-count="4" data-photos="big-toys-1,big-toys-2,big-toys-3,big-toys-4">
+        <span class="photo-frame"><img src="assets/images/gallery/t/big-toys-1.webp" width="310" height="560" alt="Big Toys – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Big Toys</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">4 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Bingo Keno" data-photo-count="2" data-photos="bingo-keno-1,bingo-keno-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/bingo-keno-1.webp" width="196" height="560" alt="Bingo Keno – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Bingo Keno</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Bombay Night" data-photo-count="3" data-photos="bombay-night-1,bombay-night-2,bombay-night-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/bombay-night-1.webp" width="289" height="560" alt="Bombay Night – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Bombay Night</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Candy Mixing" data-photo-count="2" data-photos="candy-mixing-1,candy-mixing-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/candy-mixing-1.webp" width="296" height="560" alt="Candy Mixing – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Candy Mixing</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="City Lights" data-photo-count="4" data-photos="city-lights-1,city-lights-2,city-lights-3,city-lights-4">
+        <span class="photo-frame"><img src="assets/images/gallery/t/city-lights-1.webp" width="162" height="560" alt="City Lights – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">City Lights</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">4 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Coco Cola Aerial Shot" data-photo-count="1" data-photos="coco-cola-aerial-shot-1">
+        <span class="photo-frame"><img src="assets/images/gallery/t/coco-cola-aerial-shot-1.webp" width="336" height="560" alt="Coco Cola Aerial Shot – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Coco Cola Aerial Shot</span><span class="photo-cat">Aerial Shots</span></span>
+        
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Digital Crackling" data-photo-count="3" data-photos="digital-crackling-1,digital-crackling-2,digital-crackling-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/digital-crackling-1.webp" width="197" height="560" alt="Digital Crackling – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Digital Crackling</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Divinity" data-photo-count="4" data-photos="divinity-1,divinity-2,divinity-3,divinity-4">
+        <span class="photo-frame"><img src="assets/images/gallery/t/divinity-1.webp" width="196" height="560" alt="Divinity – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Divinity</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">4 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Drools" data-photo-count="2" data-photos="drools-1,drools-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/drools-1.webp" width="194" height="560" alt="Drools – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Drools</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Fantastic 120 Shot" data-photo-count="2" data-photos="fantastic-120-shot-1,fantastic-120-shot-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/fantastic-120-shot-1.webp" width="560" height="264" alt="Fantastic 120 Shot – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Fantastic 120 Shot</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="First Look" data-photo-count="6" data-photos="first-look-1,first-look-2,first-look-3,first-look-4,first-look-5,first-look-6">
+        <span class="photo-frame"><img src="assets/images/gallery/t/first-look-1.webp" width="200" height="560" alt="First Look – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">First Look</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">6 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="God of War" data-photo-count="2" data-photos="god-of-war-1,god-of-war-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/god-of-war-1.webp" width="309" height="560" alt="God of War – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">God of War</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Golden Stars" data-photo-count="2" data-photos="golden-stars-1,golden-stars-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/golden-stars-1.webp" width="304" height="560" alt="Golden Stars – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Golden Stars</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Green Jungle" data-photo-count="2" data-photos="green-jungle-1,green-jungle-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/green-jungle-1.webp" width="293" height="560" alt="Green Jungle – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Green Jungle</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="GTA" data-photo-count="3" data-photos="gta-1,gta-2,gta-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/gta-1.webp" width="324" height="560" alt="GTA – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">GTA</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Hotstar" data-photo-count="2" data-photos="hotstar-1,hotstar-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/hotstar-1.webp" width="326" height="560" alt="Hotstar – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Hotstar</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Katy Perry" data-photo-count="2" data-photos="katy-perry-1,katy-perry-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/katy-perry-1.webp" width="196" height="560" alt="Katy Perry – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Katy Perry</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="McLaren 30 Shot" data-photo-count="3" data-photos="mclaren-30-shot-1,mclaren-30-shot-2,mclaren-30-shot-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/mclaren-30-shot-1.webp" width="560" height="258" alt="McLaren 30 Shot – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">McLaren 30 Shot</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Miracle 60 Shot" data-photo-count="4" data-photos="miracle-60-shot-1,miracle-60-shot-2,miracle-60-shot-3,miracle-60-shot-4">
+        <span class="photo-frame"><img src="assets/images/gallery/t/miracle-60-shot-1.webp" width="560" height="301" alt="Miracle 60 Shot – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Miracle 60 Shot</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">4 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Netflix" data-photo-count="3" data-photos="netflix-1,netflix-2,netflix-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/netflix-1.webp" width="366" height="560" alt="Netflix – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Netflix</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Primo" data-photo-count="3" data-photos="primo-1,primo-2,primo-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/primo-1.webp" width="332" height="560" alt="Primo – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Primo</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Rider Show 25 Shots" data-photo-count="2" data-photos="rider-show-25-shots-1,rider-show-25-shots-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/rider-show-25-shots-1.webp" width="560" height="204" alt="Rider Show 25 Shots – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Rider Show 25 Shots</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Shining Stars" data-photo-count="6" data-photos="shining-stars-1,shining-stars-2,shining-stars-3,shining-stars-4,shining-stars-5,shining-stars-6">
+        <span class="photo-frame"><img src="assets/images/gallery/t/shining-stars-1.webp" width="204" height="560" alt="Shining Stars – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Shining Stars</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">6 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Sky War" data-photo-count="2" data-photos="sky-war-1,sky-war-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/sky-war-1.webp" width="560" height="484" alt="Sky War – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Sky War</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Splash" data-photo-count="3" data-photos="splash-1,splash-2,splash-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/splash-1.webp" width="307" height="560" alt="Splash – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Splash</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Sun NXT" data-photo-count="3" data-photos="sun-nxt-1,sun-nxt-2,sun-nxt-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/sun-nxt-1.webp" width="347" height="560" alt="Sun NXT – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Sun NXT</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Sunrise" data-photo-count="2" data-photos="sunrise-1,sunrise-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/sunrise-1.webp" width="285" height="560" alt="Sunrise – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Sunrise</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Tesla 15 Shot" data-photo-count="2" data-photos="tesla-15-shot-1,tesla-15-shot-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/tesla-15-shot-1.webp" width="560" height="308" alt="Tesla 15 Shot – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Tesla 15 Shot</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="aerial" data-catname="Aerial Shots" data-name="Thunder Park" data-photo-count="2" data-photos="thunder-park-1,thunder-park-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/thunder-park-1.webp" width="560" height="415" alt="Thunder Park – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Thunder Park</span><span class="photo-cat">Aerial Shots</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Asrafi Big" data-photo-count="3" data-photos="asrafi-big-1,asrafi-big-2,asrafi-big-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/asrafi-big-1.webp" width="528" height="560" alt="Asrafi Big – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Asrafi Big</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Asrafi Small" data-photo-count="4" data-photos="asrafi-small-1,asrafi-small-2,asrafi-small-3,asrafi-small-4">
+        <span class="photo-frame"><img src="assets/images/gallery/t/asrafi-small-1.webp" width="560" height="496" alt="Asrafi Small – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Asrafi Small</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        <span class="photo-badge">4 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Bottle Fire" data-photo-count="1" data-photos="bottle-fire-1">
+        <span class="photo-frame"><img src="assets/images/gallery/t/bottle-fire-1.webp" width="560" height="285" alt="Bottle Fire – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Bottle Fire</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Colour Rain" data-photo-count="2" data-photos="colour-rain-1,colour-rain-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/colour-rain-1.webp" width="560" height="299" alt="Colour Rain – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Colour Rain</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Colour Smoke" data-photo-count="2" data-photos="colour-smoke-1,colour-smoke-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/colour-smoke-1.webp" width="220" height="560" alt="Colour Smoke – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Colour Smoke</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Crazy Racers" data-photo-count="1" data-photos="crazy-racers-1">
+        <span class="photo-frame"><img src="assets/images/gallery/t/crazy-racers-1.webp" width="560" height="483" alt="Crazy Racers – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Crazy Racers</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Crorepati" data-photo-count="2" data-photos="crorepati-1,crorepati-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/crorepati-1.webp" width="560" height="472" alt="Crorepati – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Crorepati</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Dancing Umbrella" data-photo-count="1" data-photos="dancing-umbrella-1">
+        <span class="photo-frame"><img src="assets/images/gallery/t/dancing-umbrella-1.webp" width="113" height="560" alt="Dancing Umbrella – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Dancing Umbrella</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Golden Rise" data-photo-count="3" data-photos="golden-rise-1,golden-rise-2,golden-rise-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/golden-rise-1.webp" width="560" height="169" alt="Golden Rise – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Golden Rise</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Money Bang" data-photo-count="1" data-photos="money-bang-1">
+        <span class="photo-frame"><img src="assets/images/gallery/t/money-bang-1.webp" width="560" height="456" alt="Money Bang – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Money Bang</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Peacock Feather" data-photo-count="4" data-photos="peacock-feather-1,peacock-feather-2,peacock-feather-3,peacock-feather-4">
+        <span class="photo-frame"><img src="assets/images/gallery/t/peacock-feather-1.webp" width="560" height="285" alt="Peacock Feather – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Peacock Feather</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        <span class="photo-badge">4 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Pencil Magic" data-photo-count="6" data-photos="pencil-magic-1,pencil-magic-2,pencil-magic-3,pencil-magic-4,pencil-magic-5,pencil-magic-6">
+        <span class="photo-frame"><img src="assets/images/gallery/t/pencil-magic-1.webp" width="491" height="560" alt="Pencil Magic – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Pencil Magic</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        <span class="photo-badge">6 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Photo Flash" data-photo-count="2" data-photos="photo-flash-1,photo-flash-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/photo-flash-1.webp" width="560" height="280" alt="Photo Flash – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Photo Flash</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Popcorn" data-photo-count="5" data-photos="popcorn-1,popcorn-2,popcorn-3,popcorn-4,popcorn-5">
+        <span class="photo-frame"><img src="assets/images/gallery/t/popcorn-1.webp" width="560" height="365" alt="Popcorn – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Popcorn</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        <span class="photo-badge">5 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Race Cars" data-photo-count="2" data-photos="race-cars-1,race-cars-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/race-cars-1.webp" width="560" height="234" alt="Race Cars – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Race Cars</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Red Flash Roll Caps" data-photo-count="3" data-photos="red-flash-roll-caps-1,red-flash-roll-caps-2,red-flash-roll-caps-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/red-flash-roll-caps-1.webp" width="365" height="560" alt="Red Flash Roll Caps – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Red Flash Roll Caps</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Rock Guitar" data-photo-count="1" data-photos="rock-guitar-1">
+        <span class="photo-frame"><img src="assets/images/gallery/t/rock-guitar-1.webp" width="560" height="464" alt="Rock Guitar – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Rock Guitar</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Royal Black Serpent" data-photo-count="4" data-photos="royal-black-serpent-1,royal-black-serpent-2,royal-black-serpent-3,royal-black-serpent-4">
+        <span class="photo-frame"><img src="assets/images/gallery/t/royal-black-serpent-1.webp" width="338" height="560" alt="Royal Black Serpent – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Royal Black Serpent</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        <span class="photo-badge">4 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Royal Peacock Fountain" data-photo-count="3" data-photos="royal-peacock-fountain-1,royal-peacock-fountain-2,royal-peacock-fountain-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/royal-peacock-fountain-1.webp" width="560" height="255" alt="Royal Peacock Fountain – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Royal Peacock Fountain</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Tri Colour Fountain" data-photo-count="2" data-photos="tri-colour-fountain-1,tri-colour-fountain-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/tri-colour-fountain-1.webp" width="560" height="445" alt="Tri Colour Fountain – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Tri Colour Fountain</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Twinkling Star" data-photo-count="3" data-photos="twinkling-star-1,twinkling-star-2,twinkling-star-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/twinkling-star-1.webp" width="548" height="560" alt="Twinkling Star – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Twinkling Star</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Varnajalam" data-photo-count="2" data-photos="varnajalam-1,varnajalam-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/varnajalam-1.webp" width="560" height="302" alt="Varnajalam – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Varnajalam</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="fancy" data-catname="Fancy &amp; Novelties" data-name="Watermelon" data-photo-count="2" data-photos="watermelon-1,watermelon-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/watermelon-1.webp" width="560" height="501" alt="Watermelon – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Watermelon</span><span class="photo-cat">Fancy &amp; Novelties</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="giftboxes" data-catname="Gift Boxes" data-name="Deluxe Gift Box" data-photo-count="5" data-photos="deluxe-gift-box-1,deluxe-gift-box-2,deluxe-gift-box-3,deluxe-gift-box-4,deluxe-gift-box-5">
+        <span class="photo-frame"><img src="assets/images/gallery/t/deluxe-gift-box-1.webp" width="560" height="325" alt="Deluxe Gift Box – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Deluxe Gift Box</span><span class="photo-cat">Gift Boxes</span></span>
+        <span class="photo-badge">5 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="giftboxes" data-catname="Gift Boxes" data-name="Diwali Offer Gift Box" data-photo-count="2" data-photos="diwali-offer-gift-box-1,diwali-offer-gift-box-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/diwali-offer-gift-box-1.webp" width="560" height="421" alt="Diwali Offer Gift Box – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Diwali Offer Gift Box</span><span class="photo-cat">Gift Boxes</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="giftboxes" data-catname="Gift Boxes" data-name="Festival Gift Box" data-photo-count="2" data-photos="festival-gift-box-1,festival-gift-box-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/festival-gift-box-1.webp" width="560" height="475" alt="Festival Gift Box – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Festival Gift Box</span><span class="photo-cat">Gift Boxes</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="giftboxes" data-catname="Gift Boxes" data-name="Happy Diwali Gift Box" data-photo-count="2" data-photos="happy-diwali-gift-box-1,happy-diwali-gift-box-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/happy-diwali-gift-box-1.webp" width="396" height="560" alt="Happy Diwali Gift Box – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Happy Diwali Gift Box</span><span class="photo-cat">Gift Boxes</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="giftboxes" data-catname="Gift Boxes" data-name="Super Deluxe Gift Box" data-photo-count="3" data-photos="super-deluxe-gift-box-1,super-deluxe-gift-box-2,super-deluxe-gift-box-3">
+        <span class="photo-frame"><img src="assets/images/gallery/t/super-deluxe-gift-box-1.webp" width="560" height="335" alt="Super Deluxe Gift Box – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Super Deluxe Gift Box</span><span class="photo-cat">Gift Boxes</span></span>
+        <span class="photo-badge">3 photos</span>
+      </button>
+      <button type="button" class="photo-tile" data-cat="giftboxes" data-catname="Gift Boxes" data-name="Thaalam Gift Box" data-photo-count="2" data-photos="thaalam-gift-box-1,thaalam-gift-box-2">
+        <span class="photo-frame"><img src="assets/images/gallery/t/thaalam-gift-box-1.webp" width="510" height="560" alt="Thaalam Gift Box – Selvi Fireworks, Sivakasi" loading="lazy" decoding="async"></span>
+        <span class="photo-meta"><span class="photo-name">Thaalam Gift Box</span><span class="photo-cat">Gift Boxes</span></span>
+        <span class="photo-badge">2 photos</span>
+      </button>
+    </div>
+    <p class="gallery-empty" id="gallery-empty" hidden>No photos in this type yet.</p>
   </div>
 </section>
 
@@ -268,7 +665,7 @@
     <h2>Like What You <span class="text-gold">See?</span></h2>
     <p>Contact us to order any of these products or plan a custom fireworks display for your event.</p>
     <div class="cta-actions">
-      <a href="products.html" class="btn btn-primary btn-lg">🎇 Shop Products</a>
+      <a href="products.html" class="btn btn-primary btn-lg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:8px;"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>Products</a>
       <a href="contact.html" class="btn btn-outline btn-lg">📞 Enquire Now</a>
     </div>
   </div>
@@ -279,23 +676,26 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="index.html" class="nav-logo"><span class="nav-logo-icon">🎆</span> Selvi Fireworks</a>
+        <a href="index.html" class="footer-logo-link">
+          <img src="assets/images/logo.png" alt="Selvi Fireworks Industries" class="footer-logo-img">
+        </a>
         <p class="footer-tagline">Lighting Up Every Celebration Since Sivakasi. Premium quality fireworks, crafted with passion by the Elangovan family in India's fireworks capital.</p>
         <div class="footer-social">
-          <div class="social-btn" title="Facebook">📘</div>
-          <div class="social-btn" title="Instagram">📸</div>
-          <div class="social-btn" title="WhatsApp">💬</div>
-          <div class="social-btn" title="YouTube">▶️</div>
+          <a class="social-btn" href="https://www.facebook.com/Selvi-Fireworks-Industries-127907874569435/" target="_blank" rel="noopener" title="Facebook" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a class="social-btn" href="#" hidden data-todo="add Instagram link" title="Instagram" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a>
+          <a class="social-btn" href="https://wa.me/918610163060" target="_blank" rel="noopener" title="WhatsApp" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></a>
+          <a class="social-btn" href="#" hidden data-todo="add YouTube link" title="YouTube" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#000"/></svg></a>
         </div>
       </div>
       <div>
         <h4 class="footer-col-title">Quick Links</h4>
         <ul class="footer-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="products.html">Our Products</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="index.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:8px;"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>Home</a></li>
+          <li><a href="products.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:8px;"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>Products</a></li>
+          <li><a href="about.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:8px;"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>About Us</a></li>
+          <li><a href="gallery.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:8px;"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>Gallery</a></li>
+          <li><a href="contact.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:8px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>Contact Us</a></li>
+          <li><a href="vieworders.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:8px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>My Orders</a></li>
         </ul>
       </div>
       <div>
@@ -312,16 +712,16 @@
       <div>
         <h4 class="footer-col-title">Contact Info</h4>
         <div class="footer-contact-item">
-          <span class="footer-contact-icon">📍</span>
+          <span class="footer-contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-primary);"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
           <div class="footer-contact-text">Near Dr. Anilkumar Eye Hospital, 3/1466/1-A, Srinivasa Nagar, Sattur Main Road, Sivakasi – 626189, Tamil Nadu</div>
         </div>
         <div class="footer-contact-item">
-          <span class="footer-contact-icon">📞</span>
-          <div class="footer-contact-text"><a href="tel:+919159017999">+91-91590-17999</a></div>
+          <span class="footer-contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-primary);"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          <div class="footer-contact-text"><a href="tel:+918610163060">+91-86101-63060</a></div>
         </div>
         <div class="footer-contact-item">
-          <span class="footer-contact-icon">✉️</span>
-          <div class="footer-contact-text"><a href="mailto:jjselvifireworks@gmail.com">jjselvifireworks@gmail.com</a></div>
+          <span class="footer-contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-primary);"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+          <div class="footer-contact-text"><a href="mailto:ssbalaji70754@gmail.com">ssbalaji70754@gmail.com</a></div>
         </div>
       </div>
     </div>
@@ -336,20 +736,26 @@
   </div>
 </footer>
 
-<!-- Lightbox -->
-<div id="lightbox" role="dialog" aria-modal="true" aria-label="Image Lightbox">
-  <button class="lightbox-close" id="lb-close" aria-label="Close lightbox">✕</button>
-  <div class="lightbox-inner">
-    <span class="lightbox-emoji" id="lb-emoji">🎆</span>
-    <h3 class="lightbox-title" id="lb-title">Fireworks</h3>
-    <p class="lightbox-desc" id="lb-desc"></p>
-    <div style="margin-top:28px;">
-      <a href="contact.html" class="btn btn-primary">📞 Enquire About This</a>
-    </div>
-  </div>
+<!-- Photo viewer -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Product photo viewer">
+  <button class="lightbox-close" id="lb-close" aria-label="Close viewer">&#10005;</button>
+  <button class="lb-nav lb-prev" id="lb-prev" aria-label="Previous photo">&#8249;</button>
+  <button class="lb-nav lb-next" id="lb-next" aria-label="Next photo">&#8250;</button>
+  <figure class="lightbox-inner" style="margin:0;">
+    <div class="lb-stage"><img id="lb-img" src="" alt=""></div>
+    <figcaption>
+      <h3 class="lightbox-title" id="lb-title"></h3>
+      <p class="lightbox-desc" id="lb-desc"></p>
+      <span class="lb-count" id="lb-count"></span>
+    </figcaption>
+    <div class="lb-thumbs" id="lb-thumbs"></div>
+    <a href="contact.html" class="btn btn-primary btn-sm">&#128222; Enquire About This</a>
+  </figure>
 </div>
 
-<script src="assets/js/main.js"></script>
+<script src="assets/js/theme.js?v=1"></script>
+<script src="assets/js/main.js?v=8"></script>
+<script src="assets/js/gallery.js?v=2"></script>
 
 <script>
   // Keyboard accessibility for gallery items
@@ -362,5 +768,11 @@
     });
   });
 </script>
+
+<!-- Floating contact buttons -->
+<div class="fab-stack">
+  <a class="fab fab-wa" href="https://wa.me/918610163060?text=Hi%20Selvi%20Fireworks%2C%20I%20want%20to%20know%20about%20fireworks" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" title="WhatsApp"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.5A9.9 9.9 0 1 0 12.04 2zm5.8 14.1c-.25.7-1.4 1.3-1.95 1.35-.5.05-1.1.07-1.8-.12-.4-.12-.95-.3-1.6-.6-2.8-1.2-4.6-4-4.75-4.2-.14-.2-1.15-1.5-1.15-2.9s.72-2.05 1-2.35c.25-.28.55-.35.75-.35h.55c.18 0 .42-.07.65.5.25.6.85 2.1.92 2.25.08.15.12.33.02.52-.1.2-.15.32-.3.5l-.45.5c-.15.15-.3.32-.13.62.18.3.78 1.28 1.68 2.07 1.15 1 2.12 1.33 2.42 1.47.3.15.47.12.65-.07.17-.2.75-.87.95-1.17.2-.3.4-.25.68-.15.28.1 1.75.83 2.05.98.3.15.5.22.57.35.08.12.08.72-.17 1.4z"/></svg></a>
+  <a class="fab fab-call" href="tel:+918610163060" aria-label="Call Selvi Fireworks" title="Call us"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+</div>
 </body>
 </html>

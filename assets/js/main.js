@@ -165,6 +165,7 @@
         // Update active state
         filterBtns.forEach(function (b) { b.classList.remove('active'); });
         btn.classList.add('active');
+        if (btn.scrollIntoView) { btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }); }
 
         var category = btn.getAttribute('data-filter');
 
@@ -226,14 +227,9 @@
       if (phone && !/^[\d\s\+\-\(\)]{7,15}$/.test(phone.value.trim())) {
         showError(phone, 'Please enter a valid phone number.');
       }
-      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
-        showError(email, 'Please enter a valid email address.');
-      }
-      if (subject && subject.value === '') {
-        showError(subject, 'Please select a subject.');
-      }
-      if (message && message.value.trim().length < 10) {
-        showError(message, 'Message must be at least 10 characters.');
+      // email, subject and message are optional; the email is only checked when something is typed
+      if (email && email.value.trim() !== '' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+        showError(email, 'Please enter a valid email address (or leave it empty).');
       }
 
       if (valid) {
@@ -249,45 +245,6 @@
           }
         }, 1000);
       }
-    });
-  })();
-
-  // ── Gallery Lightbox (gallery.html) ──────────
-  (function () {
-    var lightbox = document.getElementById('lightbox');
-    if (!lightbox) return;
-
-    var lbEmoji = document.getElementById('lb-emoji');
-    var lbTitle = document.getElementById('lb-title');
-    var lbDesc  = document.getElementById('lb-desc');
-    var lbClose = document.getElementById('lb-close');
-
-    document.querySelectorAll('.gallery-item').forEach(function (item) {
-      item.addEventListener('click', function () {
-        var emoji = item.getAttribute('data-emoji') || '🎆';
-        var title = item.getAttribute('data-title') || 'Fireworks';
-        var desc  = item.getAttribute('data-desc')  || '';
-        if (lbEmoji) lbEmoji.textContent = emoji;
-        if (lbTitle) lbTitle.textContent = title;
-        if (lbDesc)  lbDesc.textContent  = desc;
-        lightbox.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      });
-    });
-
-    function closeLightbox() {
-      lightbox.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    if (lbClose) lbClose.addEventListener('click', closeLightbox);
-
-    lightbox.addEventListener('click', function (e) {
-      if (e.target === lightbox) closeLightbox();
-    });
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeLightbox();
     });
   })();
 
@@ -438,6 +395,18 @@
     setTimeout(function () { rockets.push(createRocket()); }, 500);
     setTimeout(function () { rockets.push(createRocket()); }, 1200);
     setTimeout(function () { rockets.push(createRocket()); }, 2000);
+  })();
+
+
+
+  // login icon: becomes "My account" once logged in
+  (function () {
+    var t = ''; try { t = localStorage.getItem('selvi-customer-token') || ''; } catch (e) {}
+    if (!t) return;
+    var u = document.getElementById('nav-user');
+    if (u) { u.href = 'account.html'; u.title = 'My account'; u.setAttribute('aria-label', 'My account'); u.classList.add('in'); }
+    var ml = document.querySelector('.mobile-login');
+    if (ml) { ml.href = 'account.html'; ml.textContent = 'My account'; }
   })();
 
 })();

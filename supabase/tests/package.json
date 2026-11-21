@@ -1,0 +1,1 @@
+{ "name": "selvi-backend-tests", "private": true, "scripts": { "test": "node --test sql.test.mjs handlers.test.mjs account.test.mjs gate.test.mjs catalogue.test.mjs", "mock": "node mock-server.mjs" }, "type": "module", "devDependencies": { "@electric-sql/pglite": "^0.2.17" } }
