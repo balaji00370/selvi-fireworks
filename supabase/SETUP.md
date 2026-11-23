@@ -44,6 +44,7 @@ You can go live with email only and add WhatsApp and SMS when they are approved.
 3. New query again → paste `supabase/migrations/002_seed_products.sql` → **Run**. (This loads the 153 products and prices.)
 4. New query again → paste `supabase/migrations/003_customers.sql` → **Run**. (Customer accounts and OTP login.)
 5. New query again → paste `supabase/migrations/004_catalogue.sql` → **Run**. (Admin-managed products, categories, brands and settings.) Then log in at `admin.html` to manage them.
+6. New query again → paste `supabase/migrations/005_dispatch.sql` → **Run**. (No payment screenshot needed; packing photo + LR copy; login checks the name.) After running it, **re-deploy the 4 Edge functions** so they know the new rules.
 
 > **Whenever you change a price on the Book Now page**, run `python supabase/tools/gen_products_sql.py` and run the new
 > `002_seed_products.sql` in the SQL editor again. The server uses its own copy of the prices; an order with a different

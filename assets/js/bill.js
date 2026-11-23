@@ -16,6 +16,9 @@
     document.title = 'Bill ' + o.no + ' \u2014 Selvi Fireworks Industries';
     current = o;
     sheet.innerHTML = O.billHtml(o);
+    O.renderBillQr(sheet);
+    var nb = document.getElementById('bill-new');
+    if (nb && params.get('new') === '1' && !O.paid(o)) { nb.hidden = false; nb.innerHTML = '&#10003; <strong>Order confirmed!</strong> Please pay <strong>' + O.money(o.total) + '</strong> using the QR code or UPI ID at the bottom of this bill. We start packing once your payment is received.'; }
     document.getElementById('bill-no').textContent = o.no;
     var back = document.getElementById('bill-orders');
     if (isAdmin) { back.href = 'admin.html#orders'; back.innerHTML = '&larr; Admin orders'; }

@@ -23,6 +23,7 @@ export async function freshDb() {
   await db.exec(mig('002_seed_products.sql'));
   await db.exec(mig('003_customers.sql'));
   await db.exec(mig('004_catalogue.sql'));
+  await db.exec(mig('005_dispatch.sql'));
   return db;
 }
 

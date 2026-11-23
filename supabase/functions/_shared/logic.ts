@@ -39,6 +39,18 @@ export function parseImageDataUrl(s: any): any {
   return { mime: m[1], bytes, ext };
 }
 
+/** packing photo (image) or LR copy (image or PDF), up to 3 MB */
+export function parseFileDataUrl(s: any): any {
+  const m = /^data:(image\/(?:jpeg|png|webp)|application\/pdf);base64,([A-Za-z0-9+/=\s]+)$/.exec(String(s || ''));
+  if (!m) return null;
+  const bin = atob(m[2].replace(/\s/g, ''));
+  if (bin.length === 0 || bin.length > 3_000_000) return null;
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  const ext = m[1] === 'application/pdf' ? 'pdf' : m[1] === 'image/png' ? 'png' : m[1] === 'image/webp' ? 'webp' : 'jpg';
+  return { mime: m[1], bytes, ext };
+}
+
 export function validateSubmitBody(b: any): string | null {
   if (!b || typeof b !== 'object') return 'Invalid request';
   if (!b.customer || typeof b.customer !== 'object') return 'Customer details are missing';
@@ -47,7 +59,6 @@ export function validateSubmitBody(b: any): string | null {
   for (const it of b.items) {
     if (!it || !Number.isInteger(it.pid) || !Number.isInteger(it.qty) || it.qty < 1 || it.qty > 100000) return 'Invalid product or quantity';
   }
-  if (!b.screenshot) return 'Payment screenshot is required';
   return null;
 }
 

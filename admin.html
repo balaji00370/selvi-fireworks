@@ -31,8 +31,8 @@
   <link rel="stylesheet" href="assets/css/responsive.css?v=36" />
   <link rel="stylesheet" href="assets/css/theme.css?v=36" />
   <link rel="stylesheet" href="assets/css/light.css?v=112" />
-  <link rel="stylesheet" href="assets/css/mobile.css?v=105" />
-  <link rel="stylesheet" href="assets/css/orders.css?v=112" />
+  <link rel="stylesheet" href="assets/css/mobile.css?v=108" />
+  <link rel="stylesheet" href="assets/css/orders.css?v=123" />
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -97,7 +97,7 @@
       <input class="adm-search" id="adm-search" type="search" placeholder="Search bill number, name, mobile or city">
       <div class="adm-tablewrap">
         <table class="adm-table stack">
-          <thead><tr><th>Bill</th><th>Date</th><th>Customer</th><th>City</th><th class="r">Total</th><th>Payment</th><th>Status</th></tr></thead>
+          <thead><tr><th>Bill</th><th>Date</th><th>Customer</th><th>City</th><th class="r">Total</th><th>Payment</th><th>Details</th><th>Status</th></tr></thead>
           <tbody id="adm-rows"></tbody>
         </table>
       </div>
@@ -112,13 +112,15 @@
 <script src="assets/js/theme.js?v=1"></script>
 <script src="assets/js/config.js?v=1"></script>
 <script src="assets/js/vendor/supabase.js"></script>
-<script src="assets/js/orders.js?v=4"></script>
+<script src="assets/js/orders.js?v=8"></script>
+<script src="assets/js/vendor/qrcode.min.js"></script>
 <script src="assets/js/vendor/html2canvas.min.js"></script>
 <script src="assets/js/vendor/jspdf.umd.min.js"></script>
-<script src="assets/js/billpdf.js?v=1"></script>
-<script src="assets/js/admin-local.js?v=1"></script>
-<script src="assets/js/admin.js?v=8"></script>
-<script src="assets/js/admin-master.js?v=4"></script>
+<script src="assets/js/billpdf.js?v=3"></script>
+<script src="assets/js/dialog.js?v=1"></script>
+<script src="assets/js/admin-local.js?v=3"></script>
+<script src="assets/js/admin.js?v=16"></script>
+<script src="assets/js/admin-master.js?v=7"></script>
 <script>if (window.SELVI_LOCAL_ADMIN) document.getElementById("adm-testnote").hidden = false;</script>
 <script src="assets/js/main.js?v=8"></script>
 

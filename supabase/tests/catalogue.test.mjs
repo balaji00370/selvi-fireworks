@@ -20,7 +20,7 @@ test('visitors can read but not change; admins can change', async () => {
   await assert.rejects(db.query('update products set rate = 1 where pid = 1'));
   await db.exec('reset role');
   await as(db, 'authenticated', UID);
-  await db.query('update products set rate = 20, list_price = 20 where pid = 1');
+  await db.query("update products set rate = 20, list_price = 20, image_path = 'p-1.webp' where pid = 1");
   const np = await db.query("insert into products (code, name, rate, category_id) values ('X1', 'New item', 50, 1) returning pid");
   assert.ok(np.rows[0].pid >= 1000);
   await db.exec('reset role');

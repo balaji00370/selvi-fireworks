@@ -19,7 +19,7 @@
     mode = m;
     $('tab-login').classList.toggle('on', m === 'login');
     $('tab-signup').classList.toggle('on', m === 'signup');
-    $('lg-signup-only').hidden = m !== 'signup'; $('lg-email-wrap').hidden = m !== 'signup';
+    $('lg-signup-only').hidden = false; $('lg-email-wrap').hidden = m !== 'signup';
     $('lg-title').textContent = m === 'login' ? 'Welcome back' : 'Create your account';
     $('lg-send').textContent = 'Send OTP';
     say('');
@@ -57,7 +57,7 @@
     e.preventDefault();
     mobile = $('lg-mobile').value.replace(/\D/g, '').slice(-10);
     if (!/^[6-9]\d{9}$/.test(mobile)) { say('Enter a valid 10-digit mobile number.', true); return; }
-    if (mode === 'signup' && $('lg-name').value.trim().length < 2) { say('Please enter your name.', true); return; }
+    if ($('lg-name').value.trim().length < 2) { say('Please enter your name.', true); return; }
     say('Sending code…'); sendCode($('lg-send'));
   });
 

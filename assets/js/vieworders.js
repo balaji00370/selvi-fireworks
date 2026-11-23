@@ -11,16 +11,16 @@
   var shown = null;            // order opened by a manual search (may not be in the device list)
 
   function tracker(o) {
-    var at = O.stageIndex(o.status);
-    var steps = O.STAGES.map(function (s, i) {
+    var at = O.trackIndex(o);
+    var steps = O.TRACK.map(function (s, i) {
       var cls = i < at ? 'done' : i === at ? 'now' : '';
       var when = '';
-      (o.history || []).forEach(function (h) { if (h.status === s.key) when = O.dateStr(h.at); });
+      (o.history || []).forEach(function (h) { if (h.status === s.key || (s.key === 'paid' && h.status === 'payment_verified')) when = O.dateStr(h.at); });
       return '<li class="trk-step ' + cls + '"><span class="trk-dot">' + (i <= at ? s.icon : '') + '</span>' +
         '<span class="trk-label">' + s.label + '</span><span class="trk-when">' + (i <= at ? when : '') + '</span></li>';
     }).join('');
-    var cur = O.STAGES[at];
-    var pct = Math.round(at / (O.STAGES.length - 1) * 100);
+    var cur = O.TRACK[at];
+    var pct = Math.round(at / (O.TRACK.length - 1) * 100);
     return '<ol class="trk" style="--p:' + pct + '%">' + steps + '</ol>' +
       '<p class="trk-note ' + (o.status === 'arrived' ? 'ok' : '') + '">' + cur.icon + ' ' + O.esc(cur.note) +
       (o.status === 'arrived' ? ' <strong>You will receive a call on ' + O.esc(o.customer.mobile) + '.</strong>' : '') + '</p>';
@@ -28,12 +28,13 @@
 
   function card(o) {
     var items = o.items.reduce(function (s, it) { return s + it.qty; }, 0);
-    var stage = O.STAGES[O.stageIndex(o.status)];
+    var stage = O.TRACK[O.trackIndex(o)];
     var detailRows = o.items.map(function (it) {
       return '<tr><td>' + O.esc(it.name) + '</td><td class="r">' + it.qty + '</td><td class="r">' + O.money(it.amt) + '</td></tr>';
     }).join('');
-    var shot = o.payment && o.payment.screenshot
-      ? '<div class="ord-proof"><span>Payment screenshot</span><a href="' + o.payment.screenshot + '" target="_blank" rel="noopener"><img src="' + o.payment.screenshot + '" alt="Payment screenshot for ' + O.esc(o.no) + '"></a></div>' : '';
+    var photo = O.fileUrl(o.packed_photo), lr = O.fileUrl(o.lr_copy);
+    var shot = (photo ? '<div class="ord-proof"><span>Packing photo</span><a href="' + photo + '" target="_blank" rel="noopener"><img src="' + photo + '" alt="Packing photo for ' + O.esc(o.no) + '"></a></div>' : '') +
+      (lr ? '<div class="ord-proof"><span>LR copy (transport receipt)</span>' + (/^data:application\/pdf/.test(lr) || /\.pdf($|\?)/i.test(lr) ? '<a class="btn btn-outline btn-sm" href="' + lr + '" target="_blank" rel="noopener">Open LR copy (PDF)</a>' : '<a href="' + lr + '" target="_blank" rel="noopener"><img src="' + lr + '" alt="LR copy for ' + O.esc(o.no) + '"></a>') + '</div>' : '');
     var staffRow = staff
       ? '<div class="ord-staff"><span>Staff test controls:</span>' + O.STAGES.map(function (s) {
           return '<button type="button" data-set="' + s.key + '" data-no="' + O.esc(o.no) + '"' + (s.key === o.status ? ' class="on"' : '') + '>' + s.label + '</button>';
@@ -44,7 +45,7 @@
       '<div class="ord-right"><span class="chip st-' + o.status + '">' + stage.icon + ' ' + stage.label + '</span><div class="ord-total">' + O.money(o.total) + '</div></div></header>' +
       tracker(o) +
       '<details class="ord-more"><summary>Items ordered</summary><table><tbody>' + detailRows + '</tbody></table>' + shot + '</details>' +
-      '<div class="ord-actions"><a class="btn btn-primary btn-sm" href="bill.html?no=' + encodeURIComponent(o.no) + '">View bill</a>' +
+      '<div class="ord-actions"><a class="btn btn-primary btn-sm" href="bill.html?no=' + encodeURIComponent(o.no) + '">' + (O.paid(o) ? 'View bill' : 'View bill &amp; pay') + '</a>' +
       '<a class="btn btn-outline btn-sm" href="bill.html?no=' + encodeURIComponent(o.no) + '&pdf=1">Download PDF</a></div>' + staffRow + '</article>';
   }
 

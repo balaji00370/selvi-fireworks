@@ -116,3 +116,11 @@
   margin-bottom: 28px;
 }
 
+
+/* real product photos on the cards (the emoji shows only if a photo is missing) */
+.product-photo { width: 100%; aspect-ratio: 5 / 4; border-radius: var(--radius-sm, 10px); overflow: hidden; background: #ffffff; display: flex; align-items: center; justify-content: center; }
+.product-photo img { width: 100%; height: 100%; object-fit: contain; display: block; transition: transform 0.35s ease; }
+.product-card:hover .product-photo img { transform: scale(1.06); }
+.product-photo .product-icon { display: none; }
+.product-photo.no-img .product-icon { display: block; }
+.product-photo.no-img img { display: none; }

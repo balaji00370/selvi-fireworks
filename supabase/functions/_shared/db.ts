@@ -14,10 +14,16 @@ export function makeDb(url: string, serviceKey: string): any {
       if (error) throw new Error('Could not store the screenshot: ' + error.message);
     },
     async deleteProof(path: string) { await sb.storage.from('payment-proofs').remove([path]); },
+    async uploadDispatch(path: string, bytes: Uint8Array, mime: string) {
+      const { error } = await sb.storage.from('dispatch-files').upload(path, bytes, { contentType: mime, upsert: false });
+      if (error) throw new Error('Could not store the file: ' + error.message);
+    },
+    async deleteDispatch(path: string) { await sb.storage.from('dispatch-files').remove([path]); },
     createOrder: (payload: any) => rpc('create_order', { p: payload }),
     getOrder: (no: string, mobile: string) => rpc('get_order', { p_no: no, p_mobile: mobile }),
-    setStatus: (no: string, status: string, by: string, note: string | null) =>
-      rpc('set_order_status', { p_no: no, p_status: status, p_by: by, p_note: note }),
+    setStatus: (no: string, status: string, by: string, note: string | null, file: string | null = null) =>
+      rpc('set_order_status', { p_no: no, p_status: status, p_by: by, p_note: note, p_file: file }),
+    undo: (no: string, by: string, note: string | null) => rpc('undo_order_step', { p_no: no, p_by: by, p_note: note }),
     setPayment: (no: string, ps: string, by: string, note: string | null) =>
       rpc('set_payment_status', { p_no: no, p_ps: ps, p_by: by, p_note: note }),
     async verifyAdmin(jwt: string) {
@@ -26,7 +32,7 @@ export function makeDb(url: string, serviceKey: string): any {
       const { data: row } = await sb.from('admins').select('user_id').eq('user_id', data.user.id).maybeSingle();
       return row ? { id: data.user.id } : null;
     },
-    storeOtp: (mobile: string, hash: string, mode: string) => rpc('store_otp', { p_mobile: mobile, p_hash: hash, p_mode: mode }),
+    storeOtp: (mobile: string, hash: string, mode: string, name: string = '') => rpc('store_otp', { p_mobile: mobile, p_hash: hash, p_mode: mode, p_name: name }),
     verifyOtp: (mobile: string, hash: string, name: string, email: string, tokenHash: string) =>
       rpc('verify_otp', { p_mobile: mobile, p_hash: hash, p_name: name, p_email: email, p_token_hash: tokenHash }),
     sessionCustomer: (tokenHash: string) => rpc('session_customer', { p_token_hash: tokenHash }),

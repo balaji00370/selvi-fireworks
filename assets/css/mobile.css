@@ -369,3 +369,13 @@ html, body { overflow-x: clip; }
   .trk-label { font-size: 0.47rem; overflow-wrap: normal; letter-spacing: -0.2px; }
   .trk-when { font-size: 0.5rem; }
 }
+
+/* order tracker on small phones / fold cover screens: steps listed top to bottom */
+@media (max-width: 360px) {
+  .trk { grid-template-columns: minmax(0, 1fr) !important; gap: 10px; }
+  .trk::before, .trk::after { display: none !important; }
+  .trk-step { flex-direction: row !important; text-align: left !important; gap: 12px; align-items: center !important; }
+  .trk-label { font-size: 0.8rem; letter-spacing: 0; }
+  .trk-when { margin-left: auto; font-size: 0.7rem; }
+  .trk-dot { width: 34px; height: 34px; flex: none; }
+}

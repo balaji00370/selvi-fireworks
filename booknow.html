@@ -32,7 +32,7 @@
   <link rel="stylesheet" href="assets/css/theme.css?v=36" />
   <link rel="stylesheet" href="assets/css/booknow.css?v=104" />
   <link rel="stylesheet" href="assets/css/light.css?v=112" />
-  <link rel="stylesheet" href="assets/css/mobile.css?v=105" />
+  <link rel="stylesheet" href="assets/css/mobile.css?v=108" />
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -4005,9 +4005,9 @@
       <div class="total-bar-val" id="tb-total">&#8377; 0.00</div>
     </div>
   </div>
-  <button class="btn-book-now" onclick="proceedToBook()">
+  <button class="btn-book-now" id="bar-book-btn" onclick="barBookClick()">
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px;"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
-    Proceed to Book
+    <span id="bar-book-label">Proceed to Book</span>
   </button>
 </div>
 
@@ -4107,10 +4107,10 @@
 <script src="assets/js/theme.js?v=1"></script>
 <script src="assets/js/main.js?v=8"></script>
 <script src="assets/js/config.js?v=1"></script>
-<script src="assets/js/orders.js?v=4"></script>
-<script src="assets/js/catalog.js?v=1"></script>
+<script src="assets/js/orders.js?v=8"></script>
+<script src="assets/js/catalog.js?v=5"></script>
 <script src="assets/js/gate.js?v=3"></script>
-<script src="assets/js/account.js?v=3"></script>
+<script src="assets/js/account.js?v=4"></script>
 <script src="assets/js/pincode.js?v=2"></script>
 <script>
   // Hide Page Loader cleanly
@@ -4286,7 +4286,19 @@
     card.hidden = false;
     card.classList.remove('reveal'); void card.offsetWidth; card.classList.add('reveal');
     card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('bar-book-label').textContent = 'Submit Booking Order';   // the details form is open: the bottom button now submits it
     setTimeout(() => { const n = document.getElementById('cust-name'); if (n) n.focus({ preventScroll: true }); }, 600);
+  }
+
+  /* bottom bar button: first it opens the details form, then it submits the booking order */
+  function barBookClick() {
+    const card = document.getElementById('checkout-form-card');
+    if (card && !card.hidden) {
+      const f = document.getElementById('order-form');
+      if (f.requestSubmit) f.requestSubmit(); else f.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+    } else {
+      proceedToBook();
+    }
   }
 
   function handleOrderSubmit(e) {

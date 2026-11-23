@@ -63,7 +63,7 @@ test('submit-order: a failing or crashing provider never breaks the order', asyn
 test('submit-order: validation and error mapping', async () => {
   const { h, deps } = await setup();
   const call = async b => { const r = await h.submitOrder(post('submit-order', b)); return [r.status, (await j(r)).error]; };
-  assert.deepEqual(await call(orderBody({ screenshot: '' })), [400, 'INVALID']);
+  assert.deepEqual(await call(orderBody({ screenshot: '' })), [200, undefined]);          // a screenshot is optional now
   assert.deepEqual(await call(orderBody({ screenshot: 'data:text/html;base64,PGI+' })), [400, 'INVALID']);
   assert.deepEqual(await call(orderBody({ items: [] })), [400, 'INVALID']);
   assert.deepEqual(await call(orderBody({ items: [{ pid: 1, qty: 'x' }] })), [400, 'INVALID']);
@@ -115,14 +115,17 @@ test('admin-update: needs an admin login', async () => {
   assert.equal((await h.adminUpdate(post('admin-update', body, { authorization: 'Bearer wrong' }))).status, 401);
 });
 
+const PNGF = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', PDFF = 'data:application/pdf;base64,JVBERi0xLjQKJSVFT0YK';
 test('admin-update: full dispatch journey sends a message at every step', async () => {
   const { h, fetchFn, deps, flush } = await setup();
   const { order } = await j(await h.submitOrder(post('submit-order', orderBody())));
   await flush();
   const auth = { authorization: 'Bearer admin-token' };
-  const step = async status => { const r = await h.adminUpdate(post('admin-update', { action: 'set_status', no: order.no, status, note: 'n' }, auth)); return [r.status, (await j(r)).order?.status]; };
+  const step = async status => { const r = await h.adminUpdate(post('admin-update', { action: 'set_status', no: order.no, status, note: 'n', file: status === 'packed' ? PNGF : status === 'transporting' ? PDFF : undefined }, auth)); return [r.status, (await j(r)).order?.status]; };
   fetchFn.calls.length = 0;
   assert.deepEqual(await step('arrived'), [409, undefined]);          // cannot skip steps
+  const bare = await h.adminUpdate(post('admin-update', { action: 'set_status', no: order.no, status: 'packed' }, auth));
+  assert.equal(bare.status, 400);                                      // packing photo is required
   assert.deepEqual(await step('packed'), [200, 'packed']);
   await flush();
   assert.ok(fetchFn.calls.some(c => c.body?.template?.name === 'order_packed'));
@@ -136,8 +139,11 @@ test('admin-update: full dispatch journey sends a message at every step', async 
   const toOwner = fetchFn.calls.find(c => c.url.includes('resend') && c.body.to[0] === 'owner@selvi.test');
   assert.match(toOwner.body.subject, /CALL CUSTOMER/);
   assert.match(toOwner.body.html, /8610163060/);
-  assert.deepEqual((await j(await h.getOrder(post('g', { no: order.no, mobile: '8610163060' })))).order.history.map(x => x.status),
-    ['placed', 'packed', 'transporting', 'arrived']);
+  const fin = (await j(await h.getOrder(post('g', { no: order.no, mobile: '8610163060' })))).order;
+  assert.deepEqual(fin.history.map(x => x.status), ['placed', 'packed', 'transporting', 'arrived']);
+  assert.match(fin.packed_photo, /^SF\d+\/packed-.*\.png$/);
+  assert.match(fin.lr_copy, /^SF\d+\/transporting-.*\.pdf$/);
+  assert.equal(deps.dispatch.size, 2);
   assert.ok(deps.logs.some(l => l.template === 'arrived' && l.audience === 'admin'));
 });
 

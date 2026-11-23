@@ -15,6 +15,15 @@
     { key: 'arrived',      label: 'Arrived',       icon: '✅',       note: 'Your parcel has arrived. Our team will call you.' }
   ];
 
+  /* what the customer sees: Order placed -> Paid -> Packed -> Transporting -> Arrive soon */
+  var TRACK = [
+    { key: 'placed',       label: 'Order placed',  icon: '📋', note: 'We received your order. Please pay using the QR / UPI ID on your bill.' },
+    { key: 'paid',         label: 'Paid',          icon: '💰', note: 'We received your payment. Thank you! We will pack your order soon.' },
+    { key: 'packed',       label: 'Packed',        icon: '📦', note: 'Your crackers are packed at our Sivakasi factory.' },
+    { key: 'transporting', label: 'Transporting',  icon: '🚚', note: 'Your parcel is on its way to the transport office.' },
+    { key: 'arrived',      label: 'Arrive soon',   icon: '✅', note: 'Your parcel will arrive soon. Our team will call you.' }
+  ];
+
   function read(key, fallback) {
     try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; } catch (e) { return fallback; }
   }
@@ -44,8 +53,26 @@
     return 'SF' + yy + (n < 10 ? '00' + n : n < 100 ? '0' + n : String(n));
   }
 
+
+  /* UPI block at the bottom-left of the bill: QR + UPI id (the bill stays the same once paid) */
+  function payBlock(o) {
+    var amt = (Math.round(Number(o.total) * 100) / 100).toFixed(2);
+    var link = 'upi://pay?pa=' + encodeURIComponent(UPI.id) + '&pn=' + encodeURIComponent(UPI.name) + '&am=' + amt + '&cu=INR&tn=' + encodeURIComponent('Bill ' + o.no);
+    return '<div class="bill-foot"><div class="bill-pay"><div class="bill-qr" data-link="' + esc(link) + '"></div>' +
+      '<div class="bill-pay-text"><b>Pay by UPI</b><span>Scan the QR with any UPI app<br>or pay to UPI ID:</span><strong>' + esc(UPI.id) + '</strong>' +
+      '<span>Amount: <b>' + money(o.total) + '</b></span></div></div></div>';
+  }
+  /* draw the QR codes inside a bill (needs assets/js/vendor/qrcode.min.js) */
+  function renderBillQr(root) {
+    (root || document).querySelectorAll('.bill-qr[data-link]').forEach(function (el) {
+      if (el.firstChild) return;
+      if (w.QRCode) new w.QRCode(el, { text: el.getAttribute('data-link'), width: 112, height: 112, correctLevel: w.QRCode.CorrectLevel.M });
+      else el.textContent = 'QR';
+    });
+  }
+
   var Orders = {
-    UPI: UPI, CONTACT: CONTACT, STAGES: STAGES, esc: esc, money: money, dateStr: dateStr, digits: digits,
+    UPI: UPI, CONTACT: CONTACT, STAGES: STAGES, TRACK: TRACK, esc: esc, money: money, dateStr: dateStr, digits: digits,
 
     setPending: function (o) { return write(KEY_PENDING, o); },
     getPending: function () { return read(KEY_PENDING, null); },
@@ -67,16 +94,65 @@
         no: nextBillNo(now), date: now.toISOString(),
         customer: pending.customer, items: pending.items,
         subtotal: pending.subtotal, packing: pending.packing, total: pending.total,
-        payment: payment, status: 'placed',
+        payment: payment, status: 'placed', payment_status: 'pending',
         history: [{ status: 'placed', at: now.toISOString() }]
       };
       list.unshift(order);
       return write(KEY_ORDERS, list) ? order : null;
     },
-    setStatus: function (no, status) {
+    setStatus: function (no, status, file) {
       var list = Orders.all(), hit = false;
       list.forEach(function (o) {
-        if (o.no === no) { o.status = status; o.history.push({ status: status, at: new Date().toISOString() }); hit = true; }
+        if (o.no === no) { if (status === 'cancelled') o.prev_status = o.status; o.status = status; if (status === 'packed' && file) o.packed_photo = file; if (status === 'transporting' && file) o.lr_copy = file; o.history.push({ status: status, at: new Date().toISOString() }); hit = true; }
+      });
+      if (hit) write(KEY_ORDERS, list);
+      return hit;
+    },
+    /* undo the last step (test mode); the online version is the `undo` action of admin-update */
+    undo: function (no) {
+      var list = Orders.all(), done = false, err = null;
+      list.forEach(function (o) {
+        if (o.no !== no) return;
+        var old = o.status, at = new Date().toISOString();
+        if (old === 'cancelled') o.status = o.prev_status || 'placed';
+        else if (old === 'arrived') o.status = 'transporting';
+        else if (old === 'transporting') { o.status = 'packed'; delete o.lr_copy; }
+        else if (old === 'packed') { o.status = 'placed'; delete o.packed_photo; }
+        else if (o.payment_status === 'verified' || o.payment_status === 'rejected') { o.payment_status = 'pending'; o.history.push({ status: 'undo_payment', at: at }); done = true; return; }
+        else { err = 'There is nothing to undo.'; return; }
+        o.history.push({ status: 'undo_' + old, at: at }); done = true;
+      });
+      if (done) write(KEY_ORDERS, list);
+      return err ? { error: err } : done;
+    },
+    /* photo of a product: the one the admin uploaded, else the old prod_N.jpg file */
+    productImg: function (p) {
+      if (p && p.image_path) {
+        if (/^data:/.test(p.image_path)) return p.image_path;
+        var c = w.SELVI_CONFIG || {};
+        if (c.supabaseUrl) return c.supabaseUrl.replace(/\/$/, '') + '/storage/v1/object/public/product-images/' + p.image_path;
+      }
+      return 'assets/images/products/prod_' + (p ? p.pid : '') + '.jpg';
+    },
+    paid: function (o) { return !!o && o.payment_status === 'verified'; },
+    /* position on the 5-step tracker */
+    trackIndex: function (o) {
+      if (o.status === 'arrived') return 4;
+      if (o.status === 'transporting') return 3;
+      if (o.status === 'packed') return 2;
+      return Orders.paid(o) ? 1 : 0;
+    },
+    /* link for a stored packing photo / LR copy (test mode keeps the file itself in the order) */
+    fileUrl: function (p) {
+      if (!p) return '';
+      if (/^data:/.test(p)) return p;
+      var c = w.SELVI_CONFIG || {};
+      return c.supabaseUrl ? c.supabaseUrl.replace(/\/$/, '') + '/storage/v1/object/public/dispatch-files/' + p : '';
+    },
+    setPayment: function (no, ps) {
+      var list = Orders.all(), hit = false;
+      list.forEach(function (o) {
+        if (o.no === no) { o.payment_status = ps; o.history.push({ status: 'payment_' + ps, at: new Date().toISOString() }); hit = true; }
       });
       if (hit) write(KEY_ORDERS, list);
       return hit;
@@ -87,6 +163,7 @@
     },
 
     /* the printable bill (same layout as the sample bill: customer, order, product details, totals) */
+    renderBillQr: renderBillQr,
     billHtml: function (o) {
       var c = o.customer || {};
       var addr = [c.name, c.addr, [c.city, c.district].filter(Boolean).join(', ') + (c.pin ? ' - ' + c.pin : ''), c.state]
@@ -98,23 +175,23 @@
       var items = o.items.reduce(function (s, it) { return s + it.qty; }, 0);
       return '' +
         '<div class="bill-top"><strong>Selvi Fireworks, Sivakasi</strong><span>NEED HELP? CALL: <a href="tel:' + CONTACT.phone.replace(/[^+\d]/g, '') + '">' + esc(CONTACT.phone) + '</a> [24 x 7]</span></div>' +
-        '<div class="bill-head">CUSTOMER DETAILS</div>' +
+        '<div class="bill-two"><div><div class="bill-head">CUSTOMER DETAILS</div>' +
         '<div class="bill-body">' + addr.map(function (l) { return '<div>' + esc(l) + '</div>'; }).join('') +
-        (c.email ? '<div>' + esc(c.email) + '</div>' : '') + '<div>' + esc(c.mobile) + '</div></div>' +
-        '<div class="bill-head">ORDER DETAILS</div>' +
+        (c.email ? '<div>' + esc(c.email) + '</div>' : '') + '<div>' + esc(c.mobile) + '</div></div></div>' +
+        '<div><div class="bill-head">ORDER DETAILS</div>' +
         '<div class="bill-body"><table class="kv">' +
         '<tr><td>Bill / Order No</td><td><strong>' + esc(o.no) + '</strong></td></tr>' +
         '<tr><td>Order Date</td><td>' + dateStr(o.date) + '</td></tr>' +
         '<tr><td>No. of Products</td><td>' + o.items.length + '</td></tr>' +
         '<tr><td>No. of Items</td><td>' + items + '</td></tr>' +
-        '<tr><td>Payment</td><td>UPI (' + esc(UPI.id) + ')' + (o.payment && o.payment.utr ? ' &middot; Ref ' + esc(o.payment.utr) : '') + '</td></tr>' +
-        '<tr><td>Net Amount</td><td>' + money(o.total) + '</td></tr></table></div>' +
+        '<tr><td>Payment</td><td>By UPI</td></tr>' +
+        '<tr><td>Net Amount</td><td>' + money(o.total) + '</td></tr></table></div></div></div>' +
         '<div class="bill-head">PRODUCT DETAILS</div>' +
         '<table class="bill-items"><thead><tr><th>Sl No</th><th>Code</th><th>Product</th><th>Rate per Unit</th><th>No. of Units</th><th>Amount</th></tr></thead><tbody>' + rows + '</tbody></table>' +
         '<div class="bill-totals"><div><span>Total</span><span>' + money(o.subtotal) + '</span></div>' +
-        '<div><span>ADD : PACKING @ 3.00 %</span><span>' + money(o.packing) + '</span></div>' +
+        '<div><span>ADD : PACKING @ ' + (o.subtotal > 0 ? (Math.round(o.packing / o.subtotal * 10000) / 100).toFixed(2) : '3.00') + ' %</span><span>' + money(o.packing) + '</span></div>' +
         '<div class="grand"><span>GRAND TOTAL</span><span>' + money(o.total) + '</span></div></div>' +
-        '<p class="bill-eoe">E.&amp;O.E.</p>';
+        payBlock(o) + '<p class="bill-eoe">E.&amp;O.E.</p>';
     }
   };
 

@@ -1,6 +1,6 @@
 // The three public entry points, written against small interfaces (deps) so that the same code runs
 // on Supabase (index.ts files) and in the local tests.
-import { corsHeaders, parseImageDataUrl, validateSubmitBody, mapDbError, normMobile, sha256Hex, randomDigits, randomToken } from './logic.ts';
+import { corsHeaders, parseImageDataUrl, parseFileDataUrl, validateSubmitBody, mapDbError, normMobile, sha256Hex, randomDigits, randomToken } from './logic.ts';
 
 export function makeHandlers(deps: any) {
   const { db, notifier } = deps;
@@ -41,12 +41,15 @@ export function makeHandlers(deps: any) {
       if (!cust) return reply(req, 401, { ok: false, error: 'UNAUTHORIZED', message: 'Please log in to place an order.' });
       body.customer = { ...body.customer, mobile: cust.mobile };   // the order belongs to the verified mobile number
     }
-    const img = parseImageDataUrl(body.screenshot);
-    if (!img) return reply(req, 400, { ok: false, error: 'INVALID', message: 'The screenshot must be a JPG, PNG or WebP image under 1.5 MB.' });
-
-    const d = (deps.now ? deps.now() : new Date());
-    const path = `proofs/${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}/${crypto.randomUUID()}.${img.ext}`;
-    await db.uploadProof(path, img.bytes, img.mime);
+    // a payment screenshot is optional now (the bill carries the UPI QR); keep it if one is sent
+    let path = '';
+    if (body.screenshot) {
+      const img = parseImageDataUrl(body.screenshot);
+      if (!img) return reply(req, 400, { ok: false, error: 'INVALID', message: 'The screenshot must be a JPG, PNG or WebP image under 1.5 MB.' });
+      const d = (deps.now ? deps.now() : new Date());
+      path = `proofs/${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}/${crypto.randomUUID()}.${img.ext}`;
+      await db.uploadProof(path, img.bytes, img.mime);
+    }
     let order: any;
     try {
       order = await db.createOrder({
@@ -54,7 +57,7 @@ export function makeHandlers(deps: any) {
         utr: body.utr || '', screenshot_path: path, client_total: body.client_total
       });
     } catch (e) {
-      await db.deleteProof(path).catch(() => {});
+      if (path) await db.deleteProof(path).catch(() => {});
       throw e;
     }
     background(Promise.all([notifier.toCustomer(order, 'placed'), notifier.toAdmin(order, 'new_order')]));
@@ -80,7 +83,19 @@ export function makeHandlers(deps: any) {
     if (!b || !b.no) return reply(req, 400, { ok: false, error: 'INVALID', message: 'Missing order number.' });
 
     if (b.action === 'set_status') {
-      const order = await db.setStatus(b.no, b.status, user.id, b.note || null);
+      // Packed needs the packing photo, Transporting needs the LR copy
+      let filePath: string | null = null;
+      if (b.status === 'packed' || b.status === 'transporting') {
+        const f = parseFileDataUrl(b.file);
+        if (!f || (b.status === 'packed' && f.ext === 'pdf')) {
+          return reply(req, 400, { ok: false, error: 'INVALID', message: b.status === 'packed' ? 'Please add the packing photo (JPG, PNG or WebP under 3 MB).' : 'Please upload the LR copy (photo or PDF under 3 MB).' });
+        }
+        filePath = `${String(b.no).toUpperCase()}/${b.status}-${crypto.randomUUID()}.${f.ext}`;
+        await db.uploadDispatch(filePath, f.bytes, f.mime);
+      }
+      let order: any;
+      try { order = await db.setStatus(b.no, b.status, user.id, b.note || null, filePath); }
+      catch (e) { if (filePath) await db.deleteDispatch(filePath).catch(() => {}); throw e; }
       background((async () => {
         await notifier.toCustomer(order, b.status);
         if (b.status === 'arrived') await notifier.toAdmin(order, 'arrived');
@@ -90,6 +105,10 @@ export function makeHandlers(deps: any) {
     if (b.action === 'set_payment') {
       const order = await db.setPayment(b.no, b.payment_status, user.id, b.note || null);
       if (b.payment_status === 'rejected') background(notifier.toCustomer(order, 'payment_rejected'));
+      return reply(req, 200, { ok: true, order });
+    }
+    if (b.action === 'undo') {
+      const order = await db.undo(b.no, user.id, b.note || null);
       return reply(req, 200, { ok: true, order });
     }
     return reply(req, 400, { ok: false, error: 'INVALID', message: 'Unknown action.' });
@@ -112,11 +131,11 @@ export function makeHandlers(deps: any) {
     if (b.action === 'request_otp') {
       const mobile = normMobile(b.mobile);
       const mode = b.mode === 'signup' ? 'signup' : 'login';
-      if (mode === 'signup' && String(b.name || '').trim().length < 2) {
+      if (String(b.name || '').trim().length < 2) {
         return reply(req, 400, { ok: false, error: 'INVALID', message: 'Please enter your name.' });
       }
       const code = randomDigits(6);
-      await db.storeOtp(mobile, await hashCode(mobile, code), mode);
+      await db.storeOtp(mobile, await hashCode(mobile, code), mode, String(b.name || ''));
       const sent = await notifier.sendOtp(mobile, code);
       const ok = sent.some((r: any) => r.status === 'sent');
       if (!ok && !deps.devOtp) {

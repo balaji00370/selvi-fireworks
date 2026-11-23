@@ -32,23 +32,35 @@ test('sign up with OTP: code sent by SMS + WhatsApp, account and session created
   assert.equal(rows.length, 0);                                // used code is deleted
 });
 
+test('login needs the right name as well as the mobile number', async () => {
+  const ctx = await setup(ENV);
+  await login(ctx);
+  ctx.fetchFn.calls.length = 0;
+  const wrong = await acct(ctx.h, { action: 'request_otp', mode: 'login', mobile: '8610163060', name: 'Someone Else' });
+  assert.equal(wrong.status, 404);
+  assert.match((await j(wrong)).message, /name and mobile/i);
+  assert.equal(ctx.fetchFn.calls.length, 0, 'no code is sent for a wrong name');
+  const noName = await acct(ctx.h, { action: 'request_otp', mode: 'login', mobile: '8610163060' });
+  assert.equal(noName.status, 400);
+});
+
 test('login needs an existing account; wrong code, expiry and brute force are blocked', async () => {
   const ctx = await setup(ENV);
-  const none = await acct(ctx.h, { action: 'request_otp', mode: 'login', mobile: '8610163060' });
+  const none = await acct(ctx.h, { action: 'request_otp', mode: 'login', mobile: '8610163060', name: 'Balaji S S' });
   assert.equal(none.status, 404);
   assert.match((await j(none)).message, /sign up/i);
   await login(ctx);
   // log in again with the same number
   ctx.fetchFn.calls.length = 0;
   await ctx.db.exec(`update otp_codes set sent_at = now() - interval '1 minute'`);   // skip the 30 s wait
-  assert.equal((await acct(ctx.h, { action: 'request_otp', mode: 'login', mobile: '8610163060' })).status, 200);
+  assert.equal((await acct(ctx.h, { action: 'request_otp', mode: 'login', mobile: '8610163060', name: 'balaji  s s' })).status, 200);
   const bad = async c => (await acct(ctx.h, { action: 'verify_otp', mobile: '8610163060', code: c }));
   assert.equal((await bad('000000')).status, 400);
   for (let i = 0; i < 4; i++) await bad('111111');
   assert.equal((await bad(codeFromSms(ctx.fetchFn))).status, 429);          // 5 wrong tries: even the right code is locked
   // expired code
   await ctx.db.exec(`update otp_codes set sent_at = now() - interval '1 minute', attempts = 0`);
-  await acct(ctx.h, { action: 'request_otp', mode: 'login', mobile: '8610163060' });
+  await acct(ctx.h, { action: 'request_otp', mode: 'login', mobile: '8610163060', name: 'balaji  s s' });
   const good = codeFromSms(ctx.fetchFn);
   await ctx.db.exec(`update otp_codes set expires_at = now() - interval '1 second'`);
   assert.match((await j(await bad(good))).message, /expired/i);

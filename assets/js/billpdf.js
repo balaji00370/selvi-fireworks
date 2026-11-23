@@ -7,11 +7,11 @@
       var old = btn ? btn.textContent : '';
       if (btn) { btn.disabled = true; btn.textContent = 'Preparing PDF\u2026'; }
       return w.html2canvas(sheet, { scale: 2, backgroundColor: '#ffffff', useCORS: true, windowWidth: 1000,
-        onclone: function (doc) { var el = doc.getElementById(sheet.id); if (el) { el.style.boxShadow = 'none'; el.style.borderRadius = '0'; el.style.maxWidth = 'none'; el.style.width = '794px'; el.style.margin = '0'; } } })
+        onclone: function (doc) { var el = doc.getElementById(sheet.id); if (el) { el.style.boxShadow = 'none'; el.style.borderRadius = '0'; el.style.maxWidth = 'none'; el.style.width = '794px'; el.style.minHeight = '1123px'; el.style.margin = '0'; } } })
         .then(function (canvas) {
           var pdf = new w.jspdf.jsPDF({ unit: 'pt', format: 'a4' });
-          var pw = pdf.internal.pageSize.getWidth(), ph = pdf.internal.pageSize.getHeight(), m = 24;
-          var width = pw - 2 * m, pageH = ph - 2 * m, scale = width / canvas.width, sliceH = Math.floor(pageH / scale), y = 0, first = true;
+          var pw = pdf.internal.pageSize.getWidth(), ph = pdf.internal.pageSize.getHeight(), m = 0;   // the sheet is already A4-shaped
+          var width = pw - 2 * m, pageH = ph - 2 * m, scale = width / canvas.width, sliceH = Math.round(pageH / scale), y = 0, first = true;
           while (y < canvas.height) {
             var h = Math.min(sliceH, canvas.height - y), part = document.createElement('canvas');
             part.width = canvas.width; part.height = h;

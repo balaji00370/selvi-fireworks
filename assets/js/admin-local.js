@@ -37,12 +37,12 @@
 
   var PK = { products: 'pid', settings: 'key' };
   function ordersView() {
-    var pay = rd(K_PAY, {});
     return O.all().map(function (o) {
       var c = o.customer || {};
       return { bill_no: o.no, created_at: o.date, cust_name: c.name, cust_mobile: O.digits(c.mobile), cust_email: c.email, cust_pin: c.pin, cust_addr: c.addr, cust_city: c.city,
         cust_district: c.district, cust_state: c.state, subtotal: o.subtotal, packing: o.packing, total: o.total, utr: o.payment && o.payment.utr,
-        status: o.status, payment_status: pay[o.no] || 'submitted', screenshot_path: o.payment && o.payment.screenshot ? o.no : null,
+        status: o.status, payment_status: o.payment_status || 'pending', screenshot_path: o.payment && o.payment.screenshot ? o.no : null,
+        packed_photo: o.packed_photo || null, lr_copy: o.lr_copy || null,
         order_items: o.items.map(function (it, i) { return { id: i + 1, code: it.code, name: it.name, rate: it.rate, qty: it.qty, amount: it.amt }; }),
         order_events: (o.history || []).map(function (e, i) { return { id: i + 1, status: e.status, at: e.at, note: '' }; }), notifications: [] };
     });
@@ -109,8 +109,12 @@
   w.supabase = { createClient: function () { return client; } };
   w.SELVI_LOCAL_ADMIN = {
     act: function (b) {
-      if (b.action === 'set_status') { if (!O.setStatus(b.no, b.status)) return Promise.reject(new Error('Order not found.')); }
-      else if (b.action === 'set_payment') { var p = rd(K_PAY, {}); p[b.no] = b.payment_status; wr(K_PAY, p); }
+      if (b.action === 'set_status') {
+        if ((b.status === 'packed' || b.status === 'transporting') && !b.file) return Promise.reject(new Error(b.status === 'packed' ? 'Please add the packing photo.' : 'Please upload the LR copy.'));
+        if (!O.setStatus(b.no, b.status, b.file)) return Promise.reject(new Error('Order not found.'));
+      }
+      else if (b.action === 'set_payment') { O.setPayment(b.no, b.payment_status); }
+      else if (b.action === 'undo') { var u = O.undo(b.no); if (u && u.error) return Promise.reject(new Error(u.error)); }
       return Promise.resolve({ ok: true });
     }
   };

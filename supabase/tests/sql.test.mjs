@@ -61,7 +61,8 @@ test('validates customer details and the payment screenshot', async () => {
   await rejects(createOrder(db, good({ customer: customer({ mobile: '5123456789' }) })), /mobile/);
   await rejects(createOrder(db, good({ customer: customer({ pin: '62' }) })), /pincode/);
   await rejects(createOrder(db, good({ customer: customer({ city: '' }) })), /city/);
-  await rejects(createOrder(db, good({ screenshot_path: '' })), /screenshot/);
+  const noShot = await createOrder(db, good({ screenshot_path: '' }));          // no screenshot is fine now
+  assert.equal(noShot.payment_status, 'pending');
   // optional fields may be empty
   const o = await createOrder(db, good({ customer: customer({ email: '', addr: '', state: '' }) }));
   assert.equal(o.customer.email, null);
@@ -93,11 +94,13 @@ test('customer lookup needs the right mobile and is rate limited', async () => {
 test('status moves forward only, with history', async () => {
   const db = await freshDb();
   const o = await createOrder(db, good());
-  const set = async (s, note) => (await db.query('select set_order_status($1,$2,null,$3) o', [o.no, s, note || null])).rows[0].o;
+  const set = async (s, note, file) => (await db.query('select set_order_status($1,$2,null,$3,$4) o', [o.no, s, note || null, file || null])).rows[0].o;
   await rejects(set('arrived'), /BAD_TRANSITION/);
-  assert.equal((await set('packed')).status, 'packed');
+  await rejects(set('packed'), /packing photo/);
+  assert.equal((await set('packed', null, 'SF/p.jpg')).status, 'packed');
   await rejects(set('packed'), /NO_CHANGE/);
-  assert.equal((await set('transporting')).status, 'transporting');
+  await rejects(set('transporting'), /LR copy/);
+  assert.equal((await set('transporting', null, 'SF/lr.pdf')).status, 'transporting');
   const done = await set('arrived', 'Arrived at Madurai transport');
   assert.equal(done.status, 'arrived');
   assert.deepEqual(done.history.map(h => h.status), ['placed', 'packed', 'transporting', 'arrived']);

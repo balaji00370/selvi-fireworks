@@ -42,8 +42,10 @@
       var m = mob10(b.mobile);
       if (!/^[6-9]\d{9}$/.test(m)) throw lerr('Enter a valid 10-digit mobile number.', 400);
       var has = !!lread('selvi-local-customers', {})[m];
+      var norm = function (x) { return String(x || '').trim().replace(/\s+/g, ' ').toLowerCase(); };
+      if (String(b.name || '').trim().length < 2) throw lerr('Please enter your name.', 400);
       if (b.mode === 'login' && !has) throw lerr('No account found for this number. Please sign up first.', 404);
-      if (b.mode === 'signup' && String(b.name || '').trim().length < 2) throw lerr('Please enter your name.', 400);
+      if (b.mode === 'login' && norm(lread('selvi-local-customers', {})[m].name) !== norm(b.name)) throw lerr('The name and mobile number do not match. Please check them.', 404);
       var code = String(Math.floor(100000 + Math.random() * 900000));
       lwrite('selvi-local-otp', { mobile: m, code: code, exp: Date.now() + 600000, tries: 0 });
       return { ok: true, dev_code: code };

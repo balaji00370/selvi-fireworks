@@ -31,8 +31,8 @@
   <link rel="stylesheet" href="assets/css/responsive.css?v=36" />
   <link rel="stylesheet" href="assets/css/theme.css?v=36" />
   <link rel="stylesheet" href="assets/css/light.css?v=112" />
-  <link rel="stylesheet" href="assets/css/mobile.css?v=105" />
-  <link rel="stylesheet" href="assets/css/orders.css?v=112" />
+  <link rel="stylesheet" href="assets/css/mobile.css?v=108" />
+  <link rel="stylesheet" href="assets/css/orders.css?v=123" />
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -94,6 +94,7 @@
         <button type="button" class="btn btn-primary btn-sm" id="bill-print">Download PDF</button>
       </div>
     </div>
+    <p class="bill-new no-print" id="bill-new" hidden></p>
     <div class="bill-sheet" id="bill-sheet"></div>
     <p class="pay-note no-print" id="bill-tip" style="margin-top:14px;">&ldquo;Download PDF&rdquo; saves the bill as a PDF file. &ldquo;Print bill&rdquo; opens the print window.</p>
     <div class="bill-missing" id="bill-missing" hidden>
@@ -175,11 +176,12 @@
 
 <script src="assets/js/theme.js?v=1"></script>
 <script src="assets/js/config.js?v=1"></script>
-<script src="assets/js/orders.js?v=4"></script>
+<script src="assets/js/orders.js?v=8"></script>
+<script src="assets/js/vendor/qrcode.min.js"></script>
 <script src="assets/js/vendor/html2canvas.min.js"></script>
 <script src="assets/js/vendor/jspdf.umd.min.js"></script>
-<script src="assets/js/billpdf.js?v=1"></script>
-<script src="assets/js/bill.js?v=11"></script>
+<script src="assets/js/billpdf.js?v=3"></script>
+<script src="assets/js/bill.js?v=12"></script>
 <script src="assets/js/main.js?v=8"></script>
 
 <!-- Floating contact buttons -->
